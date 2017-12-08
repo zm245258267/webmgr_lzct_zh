@@ -1,0 +1,38 @@
+th,td{
+	white-space:nowrap;
+}
+#data_table td div{
+	max-width:200px;
+	overflow:hidden;
+	text-overflow: ellipsis;
+}
+.row{
+	margin-right:-11px !important;
+	margin-left:-11px !important;
+}
+
+.date{
+	min-width:300px;
+}
+
+.select_ul li{
+	float:left;
+	min-width:100px;
+	list-style-type:none;
+}
+.select_ul li label{
+	width:100px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+#eventSelect{
+	max-width:200px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	display:inline-block;
+}
+.clear{
+	clear:both;
+}
