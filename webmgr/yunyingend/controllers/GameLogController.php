@@ -108,13 +108,12 @@ class GameLogController extends BaseController
         }
         
         if (!empty($table)){
-        	$models = $query
-        	->offset($pagination->offset)
-        	->limit($pagination->limit)
-        	->all();
+        	//$models = $query
+        	//->offset($pagination->offset)
+//         	->limit($pagination->limit)
+        	//->all();
         	
         	$sql=$query->createCommand()->rawSql." limit {$pagination->offset},{$pagination->limit}";
-        	
         	$models=\Yii::$app->log_db->createCommand($sql)->queryAll();
         	$models=$models;
         }
