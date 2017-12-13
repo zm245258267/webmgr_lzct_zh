@@ -21,6 +21,7 @@ class EventLog
     				$eventdirs=glob($serverdir."/*");
     				if ($eventdirs){
     					foreach ($eventdirs as $eventdir){
+    						if (basename($eventdir)=='1')continue;// 在线日志不用记录
     						// 处理各个事件日志
     						$filepath=$eventdir."/";
     						$point=$filepath.'EventLog.point';
