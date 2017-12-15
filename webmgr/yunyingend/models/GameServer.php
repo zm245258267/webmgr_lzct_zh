@@ -13,7 +13,7 @@ use Yii;
  * @property string $groupId
  * @property string $spIdSet
  * @property string $openTime
- * @property integer $socketPort
+ * @property string $socket
  * @property string $serverHost
  * @property string $serverIp
  * @property integer $serverPort
@@ -51,12 +51,12 @@ class GameServer extends \backend\models\BaseModel
     {
         return [
             [['serverId', 'serverName', 'serverIp'], 'required'],
-            [['serverId', 'targetId', 'login_server', 'socketPort', 'serverPort', 'charDbPort', 'eventDbPort', 'onlineMax', 'chargeSw', 'serverSw', 'power', 'status', 'newday', 'hotday', 'cversion_higher', 'cversion_lower'], 'integer'],
+            [['serverId', 'targetId', 'login_server', 'serverPort', 'charDbPort', 'eventDbPort', 'onlineMax', 'chargeSw', 'serverSw', 'power', 'status', 'newday', 'hotday', 'cversion_higher', 'cversion_lower'], 'integer'],
             [['openTime'], 'safe'],
             [['serverName', 'charDbName', 'eventDbName', 'statusTips'], 'string', 'max' => 60],
             [['groupId'], 'string', 'max' => 200],
             [['spIdSet'], 'string', 'max' => 1024],
-            [['serverHost', 'serverIp', 'charDbIp', 'eventDbIp'], 'string', 'max' => 255],
+            [['socket','serverHost', 'serverIp', 'charDbIp', 'eventDbIp'], 'string', 'max' => 255],
             [['serverName'], 'unique']
         ];
     }
@@ -74,7 +74,7 @@ class GameServer extends \backend\models\BaseModel
             'groupId' => '分组ID',
             'spIdSet' => '渠道集',
             'openTime' => '开服时间',
-            'socketPort' => 'SOCKET端口',
+            'socket' => 'SOCKET通信地址',
             'serverHost' => '服务器HOST',
             'serverIp' => '服务器IP',
             'serverPort' => '服务器端口',
@@ -275,22 +275,22 @@ class GameServer extends \backend\models\BaseModel
                         'isSort' => true,
 //                         'udc'=>'',
                     ),
-		'socketPort' => array(
-                        'name' => 'socketPort',
+		'socket' => array(
+                        'name' => 'socket',
                         'allowNull' => false,
 //                         'autoIncrement' => false,
-//                         'comment' => 'SOCKET端口',
-//                         'dbType' => "int(10) unsigned",
-                        'defaultValue' => '0',
+//                         'comment' => 'SOCKET通信地址',
+//                         'dbType' => "char(255) unsigned",
+                        'defaultValue' => '',
                         'enumValues' => null,
                         'isPrimaryKey' => false,
-                        'phpType' => 'integer',
-                        'precision' => '10',
+                        'phpType' => 'string',
+                        'precision' => '255',
                         'scale' => '',
-                        'size' => '10',
-                        'type' => 'integer',
-                        'unsigned' => true,
-                        'label'=>$this->getAttributeLabel('socketPort'),
+                        'size' => '255',
+                        'type' => 'char',
+                        'unsigned' => false,
+                        'label'=>$this->getAttributeLabel('socket'),
                         'inputType' => 'text',
                         'isEdit' => true,
                         'isSearch' => false,

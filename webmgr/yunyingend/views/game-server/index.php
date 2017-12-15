@@ -74,7 +74,7 @@ $modelLabel = new \backend\models\GameServer();
               echo '<th onclick="orderby(\'groupId\', \'desc\')" '.CommonFun::sortClass($orderby, 'groupId').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('groupId').'</th>';
 //               echo '<th onclick="orderby(\'spIdSet\', \'desc\')" '.CommonFun::sortClass($orderby, 'spIdSet').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('spIdSet').'</th>';
               echo '<th onclick="orderby(\'openTime\', \'desc\')" '.CommonFun::sortClass($orderby, 'openTime').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('openTime').'</th>';
-//               echo '<th onclick="orderby(\'socketPort\', \'desc\')" '.CommonFun::sortClass($orderby, 'socketPort').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('socketPort').'</th>';
+              echo '<th onclick="orderby(\'socket\', \'desc\')" '.CommonFun::sortClass($orderby, 'socket').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('socket').'</th>';
               echo '<th onclick="orderby(\'serverHost\', \'desc\')" '.CommonFun::sortClass($orderby, 'serverHost').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('serverHost').'</th>';
               echo '<th onclick="orderby(\'serverIp\', \'desc\')" '.CommonFun::sortClass($orderby, 'serverIp').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('serverIp').'</th>';
               echo '<th onclick="orderby(\'serverPort\', \'desc\')" '.CommonFun::sortClass($orderby, 'serverPort').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('serverPort').'</th>';
@@ -113,7 +113,7 @@ $modelLabel = new \backend\models\GameServer();
                 echo '  <td>' . $model->groupId . '</td>';
 //                 echo '  <td>' . $model->spIdSet . '</td>';
                 echo '  <td>' . $model->openTime . '</td>';
-//                 echo '  <td>' . $model->socketPort . '</td>';
+                echo '  <td>' . $model->socket . '</td>';
                 echo '  <td>' . $model->serverHost . '</td>';
                 echo '  <td>' . $model->serverIp . '</td>';
                 echo '  <td>' . $model->serverPort . '</td>';
@@ -254,10 +254,10 @@ $modelLabel = new \backend\models\GameServer();
               <div class="clearfix"></div>
           </div>
 
-          <div id="socketPort_div" class="form-group">
-              <label for="socketPort" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("socketPort")?></label>
+          <div id="socket_div" class="form-group">
+              <label for="socket" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("socket")?></label>
               <div class="col-sm-10">
-                  <input type="text" class="form-control" id="socketPort" name="GameServer[socketPort]" placeholder="必填" />
+                  <input type="text" class="form-control" id="socket" name="GameServer[socket]" placeholder="tcp://192.168.0.1:8001" />
               </div>
               <div class="clearfix"></div>
           </div>
@@ -463,7 +463,7 @@ function orderby(field, op){
 		$("#groupId").val('');
 		$("#spIdSet").val('');
 		$("#openTime").val('');
-		$("#socketPort").val('');
+		$("#socket").val('');
 		$("#serverHost").val('');
 		$("#serverIp").val('');
 		$("#serverPort").val('');
@@ -495,7 +495,7 @@ function orderby(field, op){
     	$("#groupId").val(data.groupId);
     	$("#spIdSet").val(data.spIdSet);
     	$("#openTime").val(data.openTime);
-    	$("#socketPort").val(data.socketPort);
+    	$("#socket").val(data.socket);
     	$("#serverHost").val(data.serverHost);
     	$("#serverIp").val(data.serverIp);
     	$("#serverPort").val(data.serverPort);
@@ -524,7 +524,7 @@ function orderby(field, op){
       $("#groupId").attr({readonly:true,disabled:true});
       $("#spIdSet").attr({readonly:true,disabled:true});
       $("#openTime").attr({readonly:true,disabled:true});
-      $("#socketPort").attr({readonly:true,disabled:true});
+      $("#socket").attr({readonly:true,disabled:true});
       $("#serverHost").attr({readonly:true,disabled:true});
       $("#serverIp").attr({readonly:true,disabled:true});
       $("#serverPort").attr({readonly:true,disabled:true});
@@ -554,7 +554,7 @@ function orderby(field, op){
       $("#groupId").attr({readonly:false,disabled:false});
       $("#spIdSet").attr({readonly:false,disabled:false});
       $("#openTime").attr({readonly:false,disabled:false});
-      $("#socketPort").attr({readonly:false,disabled:false});
+      $("#socket").attr({readonly:false,disabled:false});
       $("#serverHost").attr({readonly:false,disabled:false});
       $("#serverIp").attr({readonly:false,disabled:false});
       $("#serverPort").attr({readonly:false,disabled:false});

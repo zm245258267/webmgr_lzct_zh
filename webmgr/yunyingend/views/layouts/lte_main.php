@@ -11,7 +11,6 @@ $system_rights = Yii::$app->user->identity->getSystemRights();
 $route = $this->context->route;
 $absoluteUrl = Yii::$app->request->absoluteUrl;
 $funInfo = isset($system_rights[$this->context->route]) == true ? $system_rights[$route] : null;
-
 $otherMenu = true;
 
 //检查是否为主菜单，主菜单不需要添加返回上一层菜单
@@ -298,6 +297,7 @@ if($otherMenu == false){
   <!-- Content Wrapper. Contains page content -->
   
   <div class="content-wrapper">
+    <div id="msg_info"></div>
     <section class="content-header">
      
       <h1> <?=$funInfo['menu_name']?> <small>
@@ -321,7 +321,6 @@ if($otherMenu == false){
     
     
   <?= $content ?>
-  
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
