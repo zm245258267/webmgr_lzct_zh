@@ -247,6 +247,32 @@ class CommonFun extends Object{
     }
     
     /**
+     * 模块ID转模块名
+     * @param int $id
+     * @return string
+     */
+    public static function ModuleIdToName($id){
+    	$game_module_type_config=\Yii::$app->params['GAME_MODULE_TYPE_CONFIG'];
+    	if ($game_module_type_config[$id]){
+    		return $game_module_type_config[$id];
+    	}
+    	return $id;
+    }
+    
+    /**
+     * 子模块ID转子模块名
+     * @param int $id
+     * @return string
+     */
+    public static function SubModuleIdToName($id){
+    	$game_module_sub_type_config=\Yii::$app->params['GAME_MODULE_SUB_TYPE_CONFIG'];
+    	if ($game_module_sub_type_config[$id]){
+    		return $game_module_sub_type_config[$id];
+    	}
+    	return $id;
+    }
+    
+    /**
      * 数组转对象
      * @param array $array
      * @return \stdClass[]
