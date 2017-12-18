@@ -22,6 +22,7 @@ return [
 				'DSN' => 'mysql:host=localhost;port=3306;dbname=lzct_gamepay',
 				'PWD' => '511c0fcabff6bbdb',
 				'USER' => 'root' 
-		] 
+		],
+		'EVENT_LOG_PATH'=>'/data/web/webmgr/Cron/data/gamelog/',
 ];
 
