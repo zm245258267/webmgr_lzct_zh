@@ -58,8 +58,8 @@ $modelLabel = new \backend\models\GameGoodsLog();
                   </div>
 
                   <div class="form-group" style="margin: 5px;">
-                      <label><?=$modelLabel->getAttributeLabel('goodsname')?>:</label>
-                      <input type="text" class="form-control" id="query[goodsname]" name="query[goodsname]"  value="<?=isset($query["goodsname"]) ? $query["goodsname"] : "" ?>">
+                      <label><?=$modelLabel->getAttributeLabel('module_type')?>:</label>
+                      <input type="text" class="form-control" id="query[module_type]" name="query[module_type]"  value="<?=isset($query["module_type"]) ? $query["module_type"] : "" ?>">
                   </div>
 
                   <div class="form-group" style="margin: 5px;">
@@ -92,16 +92,16 @@ $modelLabel = new \backend\models\GameGoodsLog();
               echo '<th onclick="orderby(\'account\', \'desc\')" '.CommonFun::sortClass($orderby, 'account').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('account').'</th>';
               echo '<th onclick="orderby(\'charname\', \'desc\')" '.CommonFun::sortClass($orderby, 'charname').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('charname').'</th>';
               echo '<th onclick="orderby(\'charid\', \'desc\')" '.CommonFun::sortClass($orderby, 'charid').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('charid').'</th>';
-              echo '<th onclick="orderby(\'goodsname\', \'desc\')" '.CommonFun::sortClass($orderby, 'goodsname').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('goodsname').'</th>';
-              echo '<th onclick="orderby(\'buycount\', \'desc\')" '.CommonFun::sortClass($orderby, 'buycount').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('buycount').'</th>';
+              echo '<th onclick="orderby(\'module_type\', \'desc\')" '.CommonFun::sortClass($orderby, 'module_type').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('module_type').'</th>';
+              echo '<th onclick="orderby(\'module_sub_type\', \'desc\')" '.CommonFun::sortClass($orderby, 'module_sub_type').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('module_sub_type').'</th>';
               echo '<th onclick="orderby(\'pricetype\', \'desc\')" '.CommonFun::sortClass($orderby, 'pricetype').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('pricetype').'</th>';
               echo '<th onclick="orderby(\'totalprice\', \'desc\')" '.CommonFun::sortClass($orderby, 'totalprice').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('totalprice').'</th>';
-              echo '<th onclick="orderby(\'beforeamount\', \'desc\')" '.CommonFun::sortClass($orderby, 'beforeamount').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('beforeamount').'</th>';
               echo '<th onclick="orderby(\'afteramount\', \'desc\')" '.CommonFun::sortClass($orderby, 'afteramount').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('afteramount').'</th>';
-              echo '<th onclick="orderby(\'buychannel\', \'desc\')" '.CommonFun::sortClass($orderby, 'buychannel').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('buychannel').'</th>';
               echo '<th onclick="orderby(\'charlevel\', \'desc\')" '.CommonFun::sortClass($orderby, 'charlevel').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('charlevel').'</th>';
               echo '<th onclick="orderby(\'castlelevel\', \'desc\')" '.CommonFun::sortClass($orderby, 'castlelevel').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('castlelevel').'</th>';
               echo '<th onclick="orderby(\'countryid\', \'desc\')" '.CommonFun::sortClass($orderby, 'countryid').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('countryid').'</th>';
+              echo '<th onclick="orderby(\'spid\', \'desc\')" '.CommonFun::sortClass($orderby, 'spid').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('spid').'</th>';
+              echo '<th onclick="orderby(\'sbid\', \'desc\')" '.CommonFun::sortClass($orderby, 'sbid').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('sbid').'</th>';
               echo '<th onclick="orderby(\'logtime\', \'desc\')" '.CommonFun::sortClass($orderby, 'logtime').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('logtime').'</th>';
          
 			?>
@@ -117,16 +117,16 @@ $modelLabel = new \backend\models\GameGoodsLog();
                 echo '  <td>' . $model->account . '</td>';
                 echo '  <td>' . $model->charname . '</td>';
                 echo '  <td>' . $model->charid . '</td>';
-                echo '  <td>' . $model->goodsname . '</td>';
-                echo '  <td>' . $model->buycount . '</td>';
+                echo '  <td>' . $model->module_type . '</td>';
+                echo '  <td>' . $model->module_sub_type . '</td>';
                 echo '  <td>' . ($model->pricetype==1?'金币':'金币') . '</td>';	// @todo 根据游戏定
                 echo '  <td>' . $model->totalprice . '</td>';
-                echo '  <td>' . $model->beforeamount . '</td>';
                 echo '  <td>' . $model->afteramount . '</td>';
-                echo '  <td>' . ($model->buychannel==1?'商店':'商店') . '</td>';	// @todo 根据游戏定
                 echo '  <td>' . $model->charlevel . '</td>';
                 echo '  <td>' . $model->castlelevel . '</td>';
-                echo '  <td>' . ($model->countryid==1?'女儿国':'女儿国') . '</td>';	// @todo 根据游戏定
+                echo '  <td>' . ($model->countryid) . '</td>';	// @todo 根据游戏定
+                echo '  <td>' . $model->spid . '</td>';
+                echo '  <td>' . $model->sbid . '</td>';
                 echo '  <td>' . $model->logtime . '</td>';
                 echo '</tr>';
             }
@@ -188,7 +188,7 @@ $modelLabel = new \backend\models\GameGoodsLog();
                 <?php $form = ActiveForm::begin(["id" => "game-goods-log-form", "class"=>"form-horizontal", "action"=>Url::toRoute("game-goods-log/save")]); ?>                      
                  
           <input type="hidden" class="form-control" id="server" name="server" />
-
+          
           <div id="account_div" class="form-group">
               <label for="account" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("account")?></label>
               <div class="col-sm-10">
@@ -213,18 +213,18 @@ $modelLabel = new \backend\models\GameGoodsLog();
               <div class="clearfix"></div>
           </div>
 
-          <div id="goodsname_div" class="form-group">
-              <label for="goodsname" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("goodsname")?></label>
+          <div id="module_type_div" class="form-group">
+              <label for="module_type" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("module_type")?></label>
               <div class="col-sm-10">
-                  <input type="text" class="form-control" id="goodsname" name="GameGoodsLog[goodsname]" placeholder="必填" />
+                  <input type="text" class="form-control" id="module_type" name="GameGoodsLog[module_type]" placeholder="必填" />
               </div>
               <div class="clearfix"></div>
           </div>
-
-          <div id="buycount_div" class="form-group">
-              <label for="buycount" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("buycount")?></label>
+          
+          <div id="module_sub_type_div" class="form-group">
+              <label for="module_sub_type" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("module_sub_type")?></label>
               <div class="col-sm-10">
-                  <input type="text" class="form-control" id="buycount" name="GameGoodsLog[buycount]" placeholder="必填" />
+                  <input type="text" class="form-control" id="module_sub_type" name="GameGoodsLog[module_sub_type]" placeholder="必填" />
               </div>
               <div class="clearfix"></div>
           </div>
@@ -241,6 +241,54 @@ $modelLabel = new \backend\models\GameGoodsLog();
               <label for="totalprice" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("totalprice")?></label>
               <div class="col-sm-10">
                   <input type="text" class="form-control" id="totalprice" name="GameGoodsLog[totalprice]" placeholder="必填" />
+              </div>
+              <div class="clearfix"></div>
+          </div>
+
+          <div id="countryid_div" class="form-group">
+              <label for="countryid" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("countryid")?></label>
+              <div class="col-sm-10">
+                  <input type="text" class="form-control" id="countryid" name="GameGoodsLog[countryid]" placeholder="必填" />
+              </div>
+              <div class="clearfix"></div>
+          </div>
+
+          <div id="charlevel_div" class="form-group">
+              <label for="charlevel" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("charlevel")?></label>
+              <div class="col-sm-10">
+                  <input type="text" class="form-control" id="charlevel" name="GameGoodsLog[charlevel]" placeholder="必填" />
+              </div>
+              <div class="clearfix"></div>
+          </div>
+
+          <div id="castlelevel_div" class="form-group">
+              <label for="castlelevel" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("castlelevel")?></label>
+              <div class="col-sm-10">
+                  <input type="text" class="form-control" id="castlelevel" name="GameGoodsLog[castlelevel]" placeholder="必填" />
+              </div>
+              <div class="clearfix"></div>
+          </div>
+
+          <div id="afteramount_div" class="form-group">
+              <label for="afteramount" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("afteramount")?></label>
+              <div class="col-sm-10">
+                  <input type="text" class="form-control" id="afteramount" name="GameGoodsLog[afteramount]" placeholder="必填" />
+              </div>
+              <div class="clearfix"></div>
+          </div>
+          
+          <div id="spid_div" class="form-group">
+              <label for="spid" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("spid")?></label>
+              <div class="col-sm-10">
+                  <input type="text" class="form-control" id="spid" name="GameGoodsLog[spid]" placeholder="必填" />
+              </div>
+              <div class="clearfix"></div>
+          </div>
+          
+          <div id="sbid_div" class="form-group">
+              <label for="sbid" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("sbid")?></label>
+              <div class="col-sm-10">
+                  <input type="text" class="form-control" id="sbid" name="GameGoodsLog[sbid]" placeholder="必填" />
               </div>
               <div class="clearfix"></div>
           </div>
@@ -299,10 +347,12 @@ function orderby(field, op){
 		$("#account").val('');
 		$("#charname").val('');
 		$("#charid").val('');
-		$("#goodsname").val('');
-		$("#buycount").val('');
+		$("#module_type").val('');
+		$("#module_sub_type").val('');
 		$("#pricetype").val('');
 		$("#totalprice").val('');
+		$("#spid").val('');
+		$("#sbid").val('');
 		$("#logtime").val('');
 		
 	}
@@ -311,10 +361,16 @@ function orderby(field, op){
     	$("#account").val(data.account);
     	$("#charname").val(data.charname);
     	$("#charid").val(data.charid);
-    	$("#goodsname").val(data.goodsname);
-    	$("#buycount").val(data.buycount);
+    	$("#module_type").val(data.module_type);
+    	$("#module_sub_type").val(data.module_sub_type);
     	$("#pricetype").val(data.pricetype);
     	$("#totalprice").val(data.totalprice);
+    	$("#countryid").val(data.countryid);
+    	$("#charlevel").val(data.charlevel);
+    	$("#castlelevel").val(data.castlelevel);
+    	$("#afteramount").val(data.afteramount);
+    	$("#spid").val(data.spid);
+    	$("#sbid").val(data.sbid);
     	$("#logtime").val(data.logtime);
     	}
 	if(type == "view"){
@@ -322,10 +378,16 @@ function orderby(field, op){
       $("#account").attr({readonly:true,disabled:true});
       $("#charname").attr({readonly:true,disabled:true});
       $("#charid").attr({readonly:true,disabled:true});
-      $("#goodsname").attr({readonly:true,disabled:true});
-      $("#buycount").attr({readonly:true,disabled:true});
+      $("#module_type").attr({readonly:true,disabled:true});
+      $("#module_sub_type").attr({readonly:true,disabled:true});
       $("#pricetype").attr({readonly:true,disabled:true});
       $("#totalprice").attr({readonly:true,disabled:true});
+      $("#countryid").attr({readonly:true,disabled:true});
+      $("#charlevel").attr({readonly:true,disabled:true});
+      $("#castlelevel").attr({readonly:true,disabled:true});
+      $("#afteramount").attr({readonly:true,disabled:true});
+      $("#spid").attr({readonly:true,disabled:true});
+      $("#sbid").attr({readonly:true,disabled:true});
       $("#logtime").attr({readonly:true,disabled:true});
 	$('#edit_dialog_ok').addClass('hidden');
 	}
@@ -334,10 +396,16 @@ function orderby(field, op){
       $("#account").attr({readonly:false,disabled:false});
       $("#charname").attr({readonly:false,disabled:false});
       $("#charid").attr({readonly:false,disabled:false});
-      $("#goodsname").attr({readonly:false,disabled:false});
-      $("#buycount").attr({readonly:false,disabled:false});
+      $("#module_type").attr({readonly:false,disabled:false});
+      $("#module_sub_type").attr({readonly:false,disabled:false});
       $("#pricetype").attr({readonly:false,disabled:false});
       $("#totalprice").attr({readonly:false,disabled:false});
+      $("#countryid").attr({readonly:false,disabled:false});
+      $("#charlevel").attr({readonly:false,disabled:false});
+      $("#castlelevel").attr({readonly:false,disabled:false});
+      $("#afteramount").attr({readonly:false,disabled:false});
+      $("#spid").attr({readonly:false,disabled:false});
+      $("#sbid").attr({readonly:false,disabled:false});
       $("#logtime").attr({readonly:false,disabled:false});
 		$('#edit_dialog_ok').removeClass('hidden');
 		}

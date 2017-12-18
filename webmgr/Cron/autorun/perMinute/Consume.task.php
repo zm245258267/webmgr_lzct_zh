@@ -12,7 +12,7 @@ class Consume
     public function run ()
     {
     		$db=new \Db(C('YUNYINGEND_DB'));
-    		$fields="`server`,`account`,`charname`,`charid`,`module_type`,`module_sub_type`,`pricetype`,`totalprice`,`countryid`,`charlevel`,`castlelevel`,`afteramount`,`logtime`";
+    		$fields="`server`,`account`,`charname`,`charid`,`module_type`,`module_sub_type`,`pricetype`,`totalprice`,`countryid`,`charlevel`,`castlelevel`,`afteramount`,`spid`,`sbid`,`logtime`";
     		$errorLogFile=LOG_ROOT.'ConsumeLog.err'; // 错误日志文件
     		$EventLogPath=C('EVENT_LOG_PATH');	// 行为日志目录
     		
@@ -72,6 +72,8 @@ class Consume
     								$charlevel=$row[7];
     								$castlelevel=$row[4];
     								$afteramount=$row[12];
+    								$spid=$row[20];
+    								$sbid=$row[21];
     								$logtime=($row[22]?$row[22]:date('Y-m-d H:i:s'));
     								
     								$values="('{$serverId}',";
@@ -86,6 +88,8 @@ class Consume
     								$values.="'{$charlevel}',";
     								$values.="'{$castlelevel}',";
     								$values.="'{$afteramount}',";
+    								$values.="'{$spid}',";
+    								$values.="'{$sbid}',";
     								$values.="'{$logtime}')";
     								
     								if ($sqlValues==''){

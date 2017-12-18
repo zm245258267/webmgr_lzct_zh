@@ -33,9 +33,10 @@ class GameGoodsLog extends \backend\models\BaseModel
     {
         return [
             [['server'], 'required'],
-            [['server', 'charid', 'buycount', 'pricetype', 'totalprice','beforeamount','afteramount','countryid','charlevel','castlelevel'], 'integer'],
+            [['server', 'charid','module_type','module_sub_type', 'pricetype', 'totalprice','afteramount','countryid','charlevel','castlelevel'], 'integer'],
             [['logtime'], 'safe'],
-            [['account', 'charname', 'goodsname','buychannel'], 'string', 'max' => 64]
+            [['account', 'charname'], 'string', 'max' => 64],
+            [['spid', 'sbid'], 'string', 'max' => 16],
         ];
     }
 
@@ -49,16 +50,16 @@ class GameGoodsLog extends \backend\models\BaseModel
             'account' => '账号',
             'charname' => '角色名',
             'charid' => '角色ID',
-            'goodsname' => '物品名',
-            'buycount' => '购买数量',
+            'module_type' => '消费类型',
+            'module_sub_type' => '消费子类型',
             'pricetype' => '货币类型',
-            'totalprice' => '总价',
-            'beforeamount' => '购买前货币数量',
-            'afteramount' => '购买后货币数量',
-            'buychannel' => '购买渠道',
+            'totalprice' => '消费数量',
+            'afteramount' => '剩余总量',
             'charlevel' => '领主等级',
             'castlelevel' => '城堡等级',
             'countryid' => '国家',
+            'spid' => '渠道',
+            'sbid' => '子渠道',
             'logtime' => '日志时间',
         ];
     }
