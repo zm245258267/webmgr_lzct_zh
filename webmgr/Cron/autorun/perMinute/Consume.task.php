@@ -17,11 +17,12 @@ class Consume
     		$EventLogPath=C('EVENT_LOG_PATH');	// 行为日志目录
     		
     		// 遍历所有服务器下的日志
-    		$serverdirs=glob($this->eventLogPath."*");
+    		$serverdirs=glob($EventLogPath."*");
     		
     		if ($serverdirs){
     			
     			foreach ($serverdirs as $serverdir){
+    				if (!is_dir($serverdir))continue;
     				
     				$eventdir=$serverdir."/6/";	// 资源使用
     				
@@ -31,7 +32,7 @@ class Consume
     				
     				if (!file_exists($point)){
     					// 默认从一天前开始读取
-    					file_put_contents($point, strtotime('-1 day'));
+    					file_put_contents($point, strtotime('-1 day'),FILE_APPEND);
     				}
     				
     				if (file_exists($point)){
