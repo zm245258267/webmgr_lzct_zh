@@ -46,6 +46,7 @@ class Role
     				
     				foreach ($eventIdSet as $eventId){
     					$eventdir=$serverdir."/{$eventId}/";
+    					if (!is_dir($eventdir))continue;
     					
     					// 处理各个事件日志
     					$filepath=$eventdir;
