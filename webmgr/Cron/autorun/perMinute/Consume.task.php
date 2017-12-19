@@ -56,6 +56,8 @@ class Consume
     							foreach ($rows as $row){
     								$row=explode(",", $row);
     								
+    								// 记到最后一个文件 ，减少文件扫描，文件不会覆盖的
+    								$currentFileName=$pointfilename;	// 当前读到了哪个文件
     								// 只记录金币消耗
     								if ($row[10]!='1')continue;
     								
@@ -98,7 +100,6 @@ class Consume
     									$sqlValues.=",{$values}";
     								}
     								$totalRecord+=1;
-    								$currentFileName=$pointfilename;	// 当前读到了哪个文件
     							}
     						}
     						
