@@ -1,140 +1,120 @@
 <?php
 /**
  * $Id$
+ * 行为日志处理
+ * /data/web/webmgr/Cron/data/gamelog/gamelog_99001/1/1511877899.log
  */
 namespace autorun\perMinute;
 
 class EventLog
 {
-	public $eventLogPath='/data/web/webmgr/Cron/data/gamelog/';
-	public $logPath='/data/web/webmgr/Cron/logs/';
-
     public function run ()
     {
     		$db=new \Db(C('LOG_DB'));
-    		// /data/web/webmgr/Cron/data/gamelog/gamelog_99001/1/1511877899.log
+    		$fields="`eventId`,`playerId`,`playerName`,`playerAccount`,`castleLevel`,`countryId`,`viplv`,`charlevel`,`targetId`,`targetName`,`field1`,`field2`,`field3`,`field4`,`field5`,`field6`,`field7`,`field8`,`field9`,`field10`,`spid`,`sbid`,`time`";
+    		$errorLogFile=LOG_ROOT.'EventLog.err'; // 错误日志文件
+    		$EventLogPath=C('EVENT_LOG_PATH');	// 行为日志目录
 
     		// 遍历所有服务器下的日志
-    		$serverdirs=glob($this->eventLogPath."*");
+    		$serverdirs=glob($EventLogPath."*");
+    		
     		if ($serverdirs){
     			foreach ($serverdirs as $serverdir){
+    				
+    				if (!is_dir($serverdir))continue;
+    				
     				$eventdirs=glob($serverdir."/*");
+    				
     				if ($eventdirs){
     					foreach ($eventdirs as $eventdir){
-    						if (basename($eventdir)=='1')continue;// 在线日志不用记录
+    						
+    						$eventId=basename($eventdir);
+    						
+    						if (!is_dir($eventdir))continue;
+    						if (in_array($eventId, [1,38]))continue;// 在线日志等不用记录
+    						
     						// 处理各个事件日志
     						$filepath=$eventdir."/";
     						$point=$filepath.'EventLog.point';
-    						$pointfilename="*";
     						
-    						// 第一次取第一个
     						if (!file_exists($point)){
-    							$files=glob($filepath.$pointfilename);
-    							$tmpfilename=array_shift($files);
-    							$timestamp=basename($tmpfilename,'.log');
-    							if ($timestamp){
-    								file_put_contents($point, $timestamp);
-    							}
+    							// 默认从一天前开始读取
+    							file_put_contents($point, strtotime('-1 day'),FILE_APPEND);
     						}
     						
     						// 读文件 
     						if (file_exists($point)){
+    							
     							$pointfilename=file_get_contents($point);
     							$currentFileName=$pointfilename;	// 当前文件名(保存当前实际文件 名)
     							$timestamp=$pointfilename+0;
     							$date=date('Ymd',$timestamp);
-    							$is_cross=false;
-    							$sql='';
+    							$sqlValues='';
     							$nowtime=time();
-    							// 长度限制
-    							$n=0;
+    							$n=0;// 长度限制
+    							
     							// 读取文件
     							for ($i=$timestamp;$i<$nowtime;$i++){
-    								$curdate=date('Ymd',$pointfilename);
-    								if ($curdate!=$date){	// 跨天了
-    									$is_cross=true;
-    									break;
-    								}
     								
     								$filename=$filepath.$pointfilename.'.log';
+    								
     								if (file_exists($filename)){
-    									// 限制长度
-    									if ($n>999){
-    										break;
-    									}
-    									$content=addslashes(trim(file_get_contents($filename)));
-    									$content="'".str_replace(",", "','", $content)."'";
-    									$content="(".str_replace("\r\n", "'),('", $content).")";
-    									if($sql==''){
-    										$sql=$content;
-    									}else{
-    										$sql.=(','.$content);
-    									}
-    									$currentFileName=$pointfilename;
-    									$n++;
-    								}
-    								$pointfilename+=1;
-    							}
-    							
-    							// 入库
-    							$fields="`eventId`,`playerId`,`playerName`,`playerAccount`,`castleLevel`,`countryId`,`viplv`,`charlevel`,`targetId`,`targetName`,`field1`,`field2`,`field3`,`field4`,`field5`,`field6`,`field7`,`field8`,`field9`,`field10`,`spid`,`sbid`,`time`";
-    							if ($sql!=''){
-    								$tablename=basename($serverdir).'_'.$date;
-    								$sql="insert into {$tablename} ({$fields}) values {$sql}";
-    								$db->insertAll($sql);
-									$error=$db->getError();
-									if($error){
-										$error='['.date('Y-m-d H:i:s').']'.$error."\r\n";
-										file_put_contents($this->logPath.'EventLog.err',$error,FILE_APPEND);
-										break;
-									}
-    								$sql='';	// 复原
-    							}
-    							
-    							// 跨天追加处理
-    							// 长度限制
-    							$n=0;
-    							if ($is_cross){
-    								// 读取文件
-    								$date=date('Ymd',$pointfilename);
-    								for ($i=$pointfilename;$i<$nowtime;$i++){
-    									$filename=$filepath.$pointfilename.'.log';
+    									
     									$curdate=date('Ymd',$pointfilename);
+    									
+    									// 跨天了
     									if ($curdate!=$date){
-    										break;
-    									}
-    									if (file_exists($filename)){
-    										// 限制长度
-    										if ($n>999){
-    											break;
+    										
+    										if ($sqlValues){
+    											$tablename=basename($serverdir).'_'.$date;
+    											$sql="insert into {$tablename} ({$fields}) values {$sqlValues}";
+    											$db->insertAll($sql);
+    											$error=$db->getError();
+    											if($error){
+    												$error='['.date('Y-m-d H:i:s').']'.$error."\r\n";
+    												file_put_contents($errorLogFile,$error,FILE_APPEND);
+    											}
     										}
     										
-    										$content=addslashes(trim(file_get_contents($filename)));
-    										$content="'".str_replace(",", "','", $content)."'";
-    										$content="(".str_replace("\r\n", "'),('", $content).")";
-    										if($sql==''){
-    											$sql=$content;
+    										// 复原
+    										$sqlValues='';
+    										$n=0;
+    										
+    										$date=$curdate;
+    									}
+    									
+    									$content=addslashes(trim(file_get_contents($filename)));
+    									$rows=explode("\r\n", $content);
+    									
+    									foreach ($rows as $row){
+    										if ($sqlValues==''){
+    											$sqlValues="('".str_replace(",", "','", $row)."')";
     										}else{
-    											$sql.=(','.$content);
+    											$sqlValues.=",('".str_replace(",", "','", $row)."')";
     										}
-    										$currentFileName=$pointfilename;
     										$n++;
     									}
-    									$pointfilename+=1;
-    								}
     									
-    								if ($sql!=''){
-    									$tablename=basename($serverdir).'_'.$date;
-    									$sql="insert into {$tablename} ({$fields}) values {$sql}";
-    									$db->insertAll($sql);
-										
-										$error=$db->getError();
-										if($error){
-											$error='['.date('Y-m-d H:i:s').']'.$error."\r\n";
-											file_put_contents($this->logPath.'EventLog.err',$error,FILE_APPEND);
-											break;
-										}
+    									// 分批次
+    									if ($n>=1000){
+    										$tablename=basename($serverdir).'_'.$date;
+    										$sql="insert into {$tablename} ({$fields}) values {$sqlValues}";
+    										$db->insertAll($sql);
+    										$error=$db->getError();
+    										if($error){
+    											$error='['.date('Y-m-d H:i:s').']'.$error."\r\n";
+    											file_put_contents($errorLogFile,$error,FILE_APPEND);
+    										}
+    										
+    										// 复原
+    										$sqlValues='';
+    										$n=0;
+    									}
+    									
+    									$currentFileName=$pointfilename;
     								}
+    								
+    								$pointfilename+=1;
     							}
     							
     							// 超过一天未同步的直接PASS
@@ -144,12 +124,13 @@ class EventLog
     							}
     							
     							// 保存当前指针
-    							file_put_contents($point, $currentFileName+1);
+    							if ($currentFileName!=$timestamp){
+    								file_put_contents($point, $currentFileName+1);
+    							}
     						}
     					}
     				}
     			}
     		}
     }
-   
 }

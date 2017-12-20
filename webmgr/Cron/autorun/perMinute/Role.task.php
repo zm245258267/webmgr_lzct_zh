@@ -78,8 +78,6 @@ class Role
     								foreach ($rows as $row){
     									$row=explode(",", $row);
     									
-    									$currentFileName=$pointfilename;	// 当前读到了哪个文件
-    									
     									// 取出字段
     									$serverId=str_ireplace("gamelog_","",basename($serverdir));
     									$charid=$row[1];
@@ -132,6 +130,7 @@ class Role
     									}
     									$totalRecord+=1;
     								}
+    								$currentFileName=$pointfilename;	// 当前读到了哪个文件
     							}
     							
     							// 一次插2000
