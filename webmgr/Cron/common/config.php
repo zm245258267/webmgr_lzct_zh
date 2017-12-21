@@ -23,6 +23,6 @@ return [
 				'PWD' => '511c0fcabff6bbdb',
 				'USER' => 'root' 
 		],
-		'EVENT_LOG_PATH'=>'/data/web/webmgr/Cron/data/gamelog/',
+		'EVENT_LOG_PATH'=>'/data/web/gamelog/',
 ];
 
