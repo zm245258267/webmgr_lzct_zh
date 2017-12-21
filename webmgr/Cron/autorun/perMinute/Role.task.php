@@ -54,7 +54,7 @@ class Role
     					
     					if (!file_exists($point)){
     						// 默认从一天前开始读取
-    						file_put_contents($point, strtotime('-1 day'),FILE_APPEND);
+    						@file_put_contents($point, strtotime('-1 day'),LOCK_EX);
     					}
     					
     					if (file_exists($point)){
@@ -144,7 +144,7 @@ class Role
     								$error=$db->getError();
     								if($error){
     									$error='['.date('Y-m-d H:i:s').']'.$error."[{$sql}]\r\n";
-    									file_put_contents($errorLogFile,$error,FILE_APPEND);
+    									@file_put_contents($errorLogFile,$error,LOCK_EX|FILE_APPEND);
     								}
     								
     								// 复原
@@ -164,7 +164,7 @@ class Role
     							$error=$db->getError();
     							if($error){
     								$error='['.date('Y-m-d H:i:s').']'.$error."[{$sql}]\r\n";
-    								file_put_contents($errorLogFile,$error,FILE_APPEND);
+    								@file_put_contents($errorLogFile,$error,LOCK_EX|FILE_APPEND);
     							}
     						}
     						
@@ -176,7 +176,7 @@ class Role
     						
     						// 保存当前指针
     						if ($currentFileName!=$timestamp){
-    							file_put_contents($point, $currentFileName+1);
+    							@file_put_contents($point, $currentFileName+1,LOCK_EX);
     						}
     					}
     				}

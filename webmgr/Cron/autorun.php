@@ -2,6 +2,9 @@
 /**
  *	计划任务
  */
+
+ini_set('date.timezone', 'Asia/Shanghai');
+
 define('CLI_ROOT', str_replace('\\', '/', __DIR__) . '/');
 define('LOG_ROOT', CLI_ROOT . '/logs/');
 include 'common/db.php';
@@ -10,7 +13,10 @@ include 'common/function.php';
 if(stripos(PHP_SAPI, 'cli') === false)
     $argv = array_keys($_REQUEST);
 
+$start=time();
 Main::run($argv);
+echo "[".date('Y-m-d H:i:s')."]times:".(time()-$start)."s\r\n";
+exit();
 
 class Main
 {

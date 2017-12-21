@@ -39,7 +39,7 @@ class EventLog
     						
     						if (!file_exists($point)){
     							// 默认从一天前开始读取
-    							file_put_contents($point, strtotime('-1 day'),FILE_APPEND);
+    							@file_put_contents($point, strtotime('-1 day'),LOCK_EX);
     						}
     						
     						// 读文件 
@@ -72,7 +72,7 @@ class EventLog
     											$error=$db->getError();
     											if($error){
     												$error='['.date('Y-m-d H:i:s').']'.$error."\r\n";
-    												file_put_contents($errorLogFile,$error,FILE_APPEND);
+    												@file_put_contents($errorLogFile,$error,FILE_APPEND|LOCK_EX);
     											}
     										}
     										
@@ -103,7 +103,7 @@ class EventLog
     										$error=$db->getError();
     										if($error){
     											$error='['.date('Y-m-d H:i:s').']'.$error."\r\n";
-    											file_put_contents($errorLogFile,$error,FILE_APPEND);
+    											@file_put_contents($errorLogFile,$error,FILE_APPEND|LOCK_EX);
     										}
     										
     										// 复原
@@ -117,6 +117,18 @@ class EventLog
     								$pointfilename+=1;
     							}
     							
+    							// 没跨天且条数没超过一千
+    							if ($sqlValues){
+    								$tablename=basename($serverdir).'_'.$date;
+    								$sql="insert into {$tablename} ({$fields}) values {$sqlValues}";
+    								$db->insertAll($sql);
+    								$error=$db->getError();
+    								if($error){
+    									$error='['.date('Y-m-d H:i:s').']'.$error."\r\n";
+    									@file_put_contents($errorLogFile,$error,FILE_APPEND|LOCK_EX);
+    								}
+    							}
+    							
     							// 超过一天未同步的直接PASS
     							$pointInterval=($pointfilename-$currentFileName);
     							if ($pointInterval>86400){
@@ -125,7 +137,7 @@ class EventLog
     							
     							// 保存当前指针
     							if ($currentFileName!=$timestamp){
-    								file_put_contents($point, $currentFileName+1);
+    								@file_put_contents($point, $currentFileName+1,LOCK_EX);
     							}
     						}
     					}
