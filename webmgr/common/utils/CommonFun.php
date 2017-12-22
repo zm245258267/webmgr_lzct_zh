@@ -290,4 +290,20 @@ class CommonFun extends Object{
     	}
     	return $result;
     }
+    
+    /**
+     * 对象转数组
+     * @param array $array
+     * @return \stdClass[]
+     */
+    public static function ObjectToArray($Object){
+    	$result=[];
+    	if (is_array($Object))return $Object;
+    	if (is_object($Object)){
+    		foreach ($Object as $key=>$val){
+    			$result[$key]=$val;
+    		}
+    	}
+    	return $result;
+    }
 }
