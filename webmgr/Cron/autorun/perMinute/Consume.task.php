@@ -1,7 +1,7 @@
 <?php
 /**
  * 消费日志处理
- * eventId:6[资源使用] field1=1[金币] field2[消费数量] field3[剩余总量] field4[消费渠道] field5[消费子渠道]
+ * eventId:6[资源使用] field1=1[金币] field2[消费数量] field3[剩余总量] field4[消费渠道] field5[消费子渠道] field6[道具ID][选填] field7[道具数量][选填]
  * 日志文件DEMO /data/web/webmgr/Cron/data/gamelog/gamelog_99001/1/1511877899.log
  * $Id$
  */
@@ -12,7 +12,7 @@ class Consume
     public function run ()
     {
     		$db=new \Db(C('YUNYINGEND_DB'));
-    		$fields="`server`,`account`,`charname`,`charid`,`module_type`,`module_sub_type`,`pricetype`,`totalprice`,`countryid`,`charlevel`,`castlelevel`,`afteramount`,`spid`,`sbid`,`logtime`";
+    		$fields="`server`,`account`,`charname`,`charid`,`module_type`,`module_sub_type`,`pricetype`,`totalprice`,`countryid`,`charlevel`,`castlelevel`,`afteramount`,`goods_id`,`goods_num`,`spid`,`sbid`,`logtime`";
     		$errorLogFile=LOG_ROOT.'ConsumeLog.err'; // 错误日志文件
     		$EventLogPath=C('EVENT_LOG_PATH');	// 行为日志目录
     		
@@ -72,6 +72,8 @@ class Consume
     								$charlevel=$row[7];
     								$castlelevel=$row[4];
     								$afteramount=$row[12];
+    								$goodsId=$row[15]+0;
+    								$goodsNum=$row[16]+0;
     								$spid=$row[20];
     								$sbid=$row[21];
     								$logtime=($row[22]?$row[22]:date('Y-m-d H:i:s'));
@@ -88,6 +90,8 @@ class Consume
     								$values.="'{$charlevel}',";
     								$values.="'{$castlelevel}',";
     								$values.="'{$afteramount}',";
+    								$values.="'{$goodsId}',";
+    								$values.="'{$goodsNum}',";
     								$values.="'{$spid}',";
     								$values.="'{$sbid}',";
     								$values.="'{$logtime}')";
