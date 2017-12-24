@@ -57,6 +57,7 @@ $modelLabel = new \backend\models\GameGoodsLog();
                       <input type="text" class="form-control" id="query[charid]" name="query[charid]"  value="<?=isset($query["charid"]) ? $query["charid"] : "" ?>">
                   </div>
 
+                  <!-- 
                   <div class="form-group" style="margin: 5px;">
                       <label><?=$modelLabel->getAttributeLabel('module_type')?>:</label>
                       <input type="text" class="form-control" id="query[module_type]" name="query[module_type]"  value="<?=isset($query["module_type"]) ? $query["module_type"] : "" ?>">
@@ -66,6 +67,7 @@ $modelLabel = new \backend\models\GameGoodsLog();
                       <label><?=$modelLabel->getAttributeLabel('pricetype')?>:</label>
                       <input type="text" class="form-control" id="query[pricetype]" name="query[pricetype]"  value="<?=isset($query["pricetype"]) ? $query["pricetype"] : "" ?>">
                   </div>
+                   -->
 
                   <div class="form-group" style="margin: 5px;">
                       <label><?=$modelLabel->getAttributeLabel('logtime')?>:</label>
@@ -79,6 +81,14 @@ $modelLabel = new \backend\models\GameGoodsLog();
           	</div>
           	<!-- row end search -->
           	
+          	<div class="row">
+          		<div class="col-sm-12 table-responsive">
+          			<label>总消费金币：<?=$total_amount?></label>&nbsp;
+          			<label>总消费人数：<?=$total_persons?></label>&nbsp;
+          			<label>总消费次数：<?=$total_times?></label>&nbsp;
+          		</div>
+          	</div>
+          	
           	<!-- row start -->
           	<div class="row">
           	<div class="col-sm-12 table-responsive">
@@ -88,21 +98,11 @@ $modelLabel = new \backend\models\GameGoodsLog();
             
             <?php 
               $orderby = isset($_GET['orderby']) ? $_GET['orderby'] : '';
-              echo '<th onclick="orderby(\'server\', \'desc\')" '.CommonFun::sortClass($orderby, 'server').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('server').'</th>';
-              echo '<th onclick="orderby(\'account\', \'desc\')" '.CommonFun::sortClass($orderby, 'account').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('account').'</th>';
-              echo '<th onclick="orderby(\'charname\', \'desc\')" '.CommonFun::sortClass($orderby, 'charname').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('charname').'</th>';
-              echo '<th onclick="orderby(\'charid\', \'desc\')" '.CommonFun::sortClass($orderby, 'charid').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('charid').'</th>';
+              echo '<th onclick="orderby(\'goods_id\', \'desc\')" '.CommonFun::sortClass($orderby, 'goods_id').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('goods_id').'</th>';
               echo '<th onclick="orderby(\'module_type\', \'desc\')" '.CommonFun::sortClass($orderby, 'module_type').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('module_type').'</th>';
-              echo '<th onclick="orderby(\'module_sub_type\', \'desc\')" '.CommonFun::sortClass($orderby, 'module_sub_type').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('module_sub_type').'</th>';
-              echo '<th onclick="orderby(\'pricetype\', \'desc\')" '.CommonFun::sortClass($orderby, 'pricetype').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('pricetype').'</th>';
               echo '<th onclick="orderby(\'totalprice\', \'desc\')" '.CommonFun::sortClass($orderby, 'totalprice').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('totalprice').'</th>';
-              echo '<th onclick="orderby(\'afteramount\', \'desc\')" '.CommonFun::sortClass($orderby, 'afteramount').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('afteramount').'</th>';
-              echo '<th onclick="orderby(\'charlevel\', \'desc\')" '.CommonFun::sortClass($orderby, 'charlevel').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('charlevel').'</th>';
-              echo '<th onclick="orderby(\'castlelevel\', \'desc\')" '.CommonFun::sortClass($orderby, 'castlelevel').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('castlelevel').'</th>';
-              echo '<th onclick="orderby(\'countryid\', \'desc\')" '.CommonFun::sortClass($orderby, 'countryid').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('countryid').'</th>';
-              echo '<th onclick="orderby(\'spid\', \'desc\')" '.CommonFun::sortClass($orderby, 'spid').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('spid').'</th>';
-              echo '<th onclick="orderby(\'sbid\', \'desc\')" '.CommonFun::sortClass($orderby, 'sbid').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('sbid').'</th>';
-              echo '<th onclick="orderby(\'logtime\', \'desc\')" '.CommonFun::sortClass($orderby, 'logtime').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('logtime').'</th>';
+              echo '<th onclick="orderby(\'persons\', \'desc\')" '.CommonFun::sortClass($orderby, 'persons').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >消费人数</th>';
+              echo '<th onclick="orderby(\'times\', \'desc\')" '.CommonFun::sortClass($orderby, 'times').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >消费次数</th>';
          
 			?>
 	
@@ -112,22 +112,12 @@ $modelLabel = new \backend\models\GameGoodsLog();
             
             <?php
             foreach ($models as $model) {
-                echo '<tr id="rowid_' . $model->server . '">';
-                echo '  <td>' . $model->server . '</td>';
-                echo '  <td>' . $model->account . '</td>';
-                echo '  <td>' . $model->charname . '</td>';
-                echo '  <td>' . $model->charid . '</td>';
-                echo '  <td>' . $model->module_type . '</td>';
-                echo '  <td>' . $model->module_sub_type . '</td>';
-                echo '  <td>' . ($model->pricetype==1?'金币':'金币') . '</td>';	// @todo 根据游戏定
+                echo '<tr id="rowid_">';
+                echo '  <td>' . CommonFun::GoodsIdToName($model->goods_id) . '</td>';
+                echo '  <td>' . CommonFun::ModuleIdToName($model->module_type) . '</td>';
                 echo '  <td>' . $model->totalprice . '</td>';
-                echo '  <td>' . $model->afteramount . '</td>';
-                echo '  <td>' . $model->charlevel . '</td>';
-                echo '  <td>' . $model->castlelevel . '</td>';
-                echo '  <td>' . ($model->countryid) . '</td>';	// @todo 根据游戏定
-                echo '  <td>' . $model->spid . '</td>';
-                echo '  <td>' . $model->sbid . '</td>';
-                echo '  <td>' . $model->logtime . '</td>';
+                echo '  <td>' . $model->persons . '</td>';
+                echo '  <td>' . $model->times . '</td>';
                 echo '</tr>';
             }
             

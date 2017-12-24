@@ -136,15 +136,17 @@ class GameGoodsLogController extends BaseController
         );
         
         $orderby = Yii::$app->request->get('orderby', '');
-//         if(empty($orderby) == false){
-//             $query = $query->orderBy($orderby);
-//         }
+        if(empty($orderby) == false){
+            $query = $query->orderBy($orderby);
+        }else{
+        	$query=$query->orderBy(['totalprice'=>SORT_DESC]);
+        }
         
         $models = $query
         ->select(['module_type','goods_id','sum(`goods_num`) goods_num','sum(`totalprice`) totalprice','count(*) times','count(distinct `account`) persons'])
         ->offset($pagination->offset)
         ->limit($pagination->limit)
-        ->orderBy(['totalprice'=>SORT_DESC])
+        ->asArray()
         ->all();
         
         $total_times=0;
@@ -160,7 +162,7 @@ class GameGoodsLogController extends BaseController
         $this->view->params['end']=$end;
         $querys['logtime']="{$start} / {$end}";
         return $this->render('goods', [
-            'models'=>$models,
+            'models'=>CommonFun::ArrayToObject($models),
             'pages'=>$pagination,
             'query'=>$querys,
             'total_times'=>$total_times,

@@ -33,7 +33,7 @@ class GameGoodsLog extends \backend\models\BaseModel
     {
         return [
             [['server'], 'required'],
-            [['server', 'charid','module_type','module_sub_type', 'pricetype', 'totalprice','afteramount','countryid','charlevel','castlelevel'], 'integer'],
+            [['server', 'charid','module_type','module_sub_type', 'pricetype', 'totalprice','afteramount','countryid','charlevel','castlelevel','goods_id','goods_num'], 'integer'],
             [['logtime'], 'safe'],
             [['account', 'charname'], 'string', 'max' => 64],
             [['spid', 'sbid'], 'string', 'max' => 16],
@@ -53,11 +53,13 @@ class GameGoodsLog extends \backend\models\BaseModel
             'module_type' => '消费类型',
             'module_sub_type' => '消费子类型',
             'pricetype' => '货币类型',
-            'totalprice' => '消费数量',
+            'totalprice' => '消费总额',
             'afteramount' => '剩余总量',
             'charlevel' => '领主等级',
             'castlelevel' => '城堡等级',
             'countryid' => '国家',
+            'goods_id' => '道具ID',
+            'goods_num' => '道具数量',
             'spid' => '渠道',
             'sbid' => '子渠道',
             'logtime' => '日志时间',
