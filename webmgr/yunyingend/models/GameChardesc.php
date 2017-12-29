@@ -54,7 +54,7 @@ class GameChardesc extends \backend\models\BaseModel
     {
         return [
             [['charid', 'userid', 'account', 'charname', 'serverid', 'createtime'], 'required'],
-            [['charid', 'userid', 'serverid', 'charlevel', 'gold', 'guildid', 'charstate', 'viplv', 'vipexp', 'firstrechargelevel', 'totalrecharge'], 'integer'],
+            [['charid', 'userid', 'serverid', 'charlevel', 'gold', 'guildid', 'guildstatus', 'charstate', 'viplv', 'vipexp', 'firstrechargelevel', 'totalrecharge'], 'integer'],
             [['createtime', 'updatetime', 'firstrechargetime'], 'safe'],
             [['account'], 'string', 'max' => 64],
             [['charname', 'loginip'], 'string', 'max' => 48],
@@ -76,6 +76,7 @@ class GameChardesc extends \backend\models\BaseModel
             'charlevel' => '领主等级',
             'gold' => '金币数量',
             'guildid' => '主线任务ID',
+            'guildstatus' => '主线任务状态',
             'charstate' => '角色状态',
             'createtime' => '创建时间',
             'updatetime' => '最后更新时间',

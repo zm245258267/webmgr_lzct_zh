@@ -1,9 +1,6 @@
 
 <?php
-use yii\widgets\LinkPager;
-use yii\base\Object;
 use yii\bootstrap\ActiveForm;
-use common\utils\CommonFun;
 use yii\helpers\Url;
 
 use backend\models\GameChardesc;
@@ -48,16 +45,46 @@ $modelLabel = new \backend\models\GameChardesc();
           	<!-- row end search -->
           	
           <!-- row start -->
+          <!-- 
           <div class="row">
           	<div class="col-sm-12"><div id="chat-bar">没有数据！</div></div>
 		  </div>
+		   -->
 		  <!-- row end -->
 		  
 		  <!-- row start -->
+		  <!-- 
           <div class="row">
           	<div class="col-sm-12"><div id="chat-pie">没有数据！</div></div>
 		  </div>
+		   -->
 		  <!-- row end -->
+		  
+		  <div class="table-responsive">
+		  	<table class="table table-bordered">
+		  		<caption>任务流失</caption>
+		  		<thead>
+		  			<tr>
+		  				<th>任务名</th>
+		  				<th>接取人数</th>
+		  				<th>完成人数</th>
+		  				<th title="完成人数/(接取人数+完成人数)*100">完成率</th>
+		  			</tr>
+		  		</thead>
+		  		<tbody>
+		  			<?php foreach ($dataSet['tableData'] as $key=>$row):?>
+		  			<tr>
+		  				<td><?=$key?></td>
+		  				<td><?=$row['get']?></td>
+		  				<td><?=$row['completed']?></td>
+		  				<td><?=@round($row['completed']/($row['completed']+$row['get']),4)*100?>%</td>
+		  			</tr>
+		  			<?php endforeach;?>
+		  		</tbody>
+		  	</table>
+		  	
+		  </div>
+		  
 		  
         </div>
         </div>

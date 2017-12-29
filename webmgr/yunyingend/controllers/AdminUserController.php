@@ -6,6 +6,7 @@ use Yii;
 use yii\data\Pagination;
 use backend\models\AdminUser;
 use yii\web\NotFoundHttpException;
+use backend\models\AdminUserRole;
 
 /**
  * AdminUserController implements the CRUD actions for AdminUser model.
@@ -80,7 +81,9 @@ class AdminUserController extends BaseController
     public function actionCreate()
     {
         $model = new AdminUser();
-        if ($model->load(Yii::$app->request->post())) {
+        $rq=\Yii::$app->request;
+        
+        if ($model->load($rq->post())) {
             if(empty($model->is_online) == true){
                 $model->is_online = 'n';
             }
@@ -93,6 +96,12 @@ class AdminUserController extends BaseController
             $model->update_user = Yii::$app->user->identity->uname;
             $model->update_date = date('Y-m-d H:i:s');            
             if($model->validate() == true && $model->save()){
+                
+                // 关联用户角色
+                $userRole=new AdminUserRole();
+                $userRole->load(['form-data'=>['user_id'=>$model->id,'role_id'=>$rq->post('role_id')]]);
+                $userRole->validate() && $userRole->save();
+                
                 $msg = array('errno'=>0, 'msg'=>'保存成功');
                 echo json_encode($msg);
             }

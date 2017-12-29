@@ -230,6 +230,19 @@ class CommonFun extends Object{
     }
     
     /**
+     * 任务ID转任务名
+     * @param int $id
+     * @return string
+     */
+    public static function TaskGroupIdToName($id){
+    	$game_task_config=\Yii::$app->params['GAME_TASK_GROUP_CONFIG'];
+    	if ($game_task_config[$id]['name']){
+    		return $game_task_config[$id]['name'];
+    	}
+    	return $id;
+    }
+    
+    /**
      * 行为ID转行为名
      * @param int $id
      * @return string

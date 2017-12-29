@@ -4,6 +4,7 @@ use yii\widgets\LinkPager;
 use yii\bootstrap\ActiveForm;
 use backend\models\AdminUser;
 use yii\helpers\Url;
+use backend\models\AdminRole;
 
 $modelLabel = new \backend\models\AdminUser();
 ?>
@@ -179,7 +180,7 @@ $modelLabel = new \backend\models\AdminUser();
           <div id="password_div" class="form-group">
               <label for="password" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("password")?></label>
               <div class="col-sm-10">
-                  <input type="text" class="form-control" id="password" name="AdminUser[password]" placeholder="必填" />
+                  <input type="password" class="form-control" id="password" name="AdminUser[password]" placeholder="必填" />
               </div>
               <div class="clearfix"></div>
           </div>
@@ -188,6 +189,19 @@ $modelLabel = new \backend\models\AdminUser();
               <label for="auth_key" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("auth_key")?></label>
               <div class="col-sm-10">
                   <input type="text" class="form-control" id="auth_key" name="AdminUser[auth_key]" placeholder="" />
+              </div>
+              <div class="clearfix"></div>
+          </div>
+          
+          <div id="role_id_div" class="form-group">
+              <label for="role_id" class="col-sm-2 control-label">角色</label>
+              <div class="col-sm-10">
+              	<select class="form-control" id="role_id" name="role_id">
+              		<option value="">请选择</option>
+              		<?php foreach (AdminRole::find()->where(['<>','code','superadmin'])->all() as $row):?>
+              		<option value="<?=$row['id']?>"><?=$row['name']?></option>
+              		<?php endforeach;?>
+              	</select>
               </div>
               <div class="clearfix"></div>
           </div>
@@ -219,7 +233,10 @@ $modelLabel = new \backend\models\AdminUser();
           <div id="status_div" class="form-group">
               <label for="status" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("status")?></label>
               <div class="col-sm-10">
-                  <input type="text" class="form-control" id="status" name="AdminUser[status]" placeholder="必填" />
+              	<select class="form-control" id="status" name="AdminUser[status]">
+              		<option value="10">启用</option>
+              		<option value="20">禁用</option>
+              	</select>
               </div>
               <div class="clearfix"></div>
           </div>

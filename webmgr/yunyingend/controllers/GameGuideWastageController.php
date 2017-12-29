@@ -3,12 +3,8 @@
 namespace backend\controllers;
 
 use Yii;
-use yii\data\Pagination;
 use backend\models\GameChardesc;
-use yii\data\ActiveDataProvider;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+use common\utils\CommonFun;
 
 /**
  * GameGuideWastageController implements the CRUD actions for GameChardesc model.
@@ -50,20 +46,19 @@ class GameGuideWastageController extends BaseController
         	$query->andWhere(['in','serverid',explode(",", $serverId)]);
         }
         
-        $rows=$query->select(['guildid','count(*) nums'])->groupBy('guildid')->orderBy('guildid')->indexBy('guildid')->asArray()->all();
+        $rows=$query->select(['guildid','sum(if(`guildstatus`=0,1,0)) getNums','sum(if(`guildstatus`=0,0,1)) completedNums'])->groupBy('guildid')->orderBy('guildid')->indexBy('guildid')->asArray()->all();
         
-//         $rows=[1=>['nums'=>rand(99, 999)],2=>['nums'=>rand(99,999)],3=>['nums'=>rand(99,999)]];
+//         $barData=[];
+        $tableData=[];
         
-        $pieData=[];
-        $barData=[];
         foreach ($rows as $key=>$row){
-        	$level="任务".$key;
-        	$pieData[]=[$level,$row['nums']];
-        	$barData[$level]=$row['nums'];
+            $task=CommonFun::TaskGroupIdToName($key);
+//         	$barData[$task]=$row['getNums']+0;
+        	$tableData[$task]=['get'=>$row['getNums']+0,'completed'=>$row['completedNums']+0];
         }
 
         return $this->render('index', [
-            'dataSet'=>['pieData'=>$pieData,'barData'=>$barData],
+            'dataSet'=>['pieData'=>$pieData,'barData'=>$barData,'tableData'=>$tableData],
             'query'=>$querys,
         ]);
     }

@@ -5,12 +5,7 @@ namespace backend\controllers;
 use common\utils\CommonFun;
 
 use Yii;
-use yii\data\Pagination;
 use backend\models\GameDayOnlineTime;
-use yii\data\ActiveDataProvider;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * GameDayOnlineTimeController implements the CRUD actions for GameDayOnlineTime model.
@@ -20,11 +15,15 @@ class GameDayOnlineTimeController extends BaseController
 	public $layout = "lte_main";
 	
 	public $timeInterval=[
-		'10-'=>[0,600],
-		'10-30'=>[600,1800],
-		'30-60'=>[1800,3600],
+		'5-'=>[0,300],
+		'5-10'=>[300,600],
+		'10-20'=>[600,1200],
+		'20-30'=>[1200,1800],
+		'30-60'=>[1200,3600],
 		'60-120'=>[3600,7200],
-		'120+'=>[7200,0],
+		'120-180'=>[3600,10800],
+		'180-240'=>[10800,14400],
+	    '240+'=>[14400,0],
 	];
 
     /**
@@ -82,6 +81,7 @@ class GameDayOnlineTimeController extends BaseController
         
         $pieData=[];
         $lineData=[];
+        
         foreach ($row as $key=>$val){
         	$pieData[]=[$key,$val+0];
         	$lineData['x'][]=$key;
@@ -92,7 +92,7 @@ class GameDayOnlineTimeController extends BaseController
         $this->view->params['end']=$end;
         $querys['logdate']="{$start} / {$end}";
         return $this->render('index', [
-        		'dataSet'=>['pieData'=>$pieData,'lineData'=>$lineData],
+                'dataSet'=>['pieData'=>$pieData,'lineData'=>$lineData,'tableData'=>$pieData],
         		'query'=>$querys,
         		]);
     }

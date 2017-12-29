@@ -62,6 +62,28 @@ $modelLabel = new \backend\models\GameChardesc();
           		</div>
           	</div>
           	
+          	<div class="table-responsive">
+              	<table class="table table-bordered table-hover">
+              		<caption>等级流失</caption>
+              		<thead>
+              			<tr>
+              				<th>等级</th>
+              				<th>角色数</th>
+              				<th>占比</th>
+              			</tr>
+              		</thead>
+              		<tbody>
+              			<?php foreach ($dataSet['tableData'] as $row):?>
+              			<tr>
+              				<td><?=$row[0]?></td>
+              				<td><?=$row[1]?></td>
+              				<td><?=round($row[1]/$dataSet['totalNums'],4)*100?></td>
+              			</tr>
+              			<?php endforeach;?>
+              		</tbody>
+              	</table>
+          	</div>
+          	
           	<!-- row end -->
           	
         </div>
@@ -84,7 +106,7 @@ $modelLabel = new \backend\models\GameChardesc();
 	}
 	<?php if (!empty($dataSet['pieData'])):?>
  	show_simple_line_chart("#chat-line",<?=json_encode($dataSet['lineData'])?>,'等级分布','人数'); 
- 	show_simple_pie_chart("#chat-pie",<?=json_encode($dataSet['pieData'])?>,'等级分布','人数');
+ 	show_simple_pie_chart("#chat-pie",<?=json_encode($dataSet['pieData'])?>,'等级占比','人数');
  	<?php endif;?>
 </script>
 <?php $this->endBlock(); ?>

@@ -11,7 +11,7 @@ class Role
     public function run ()
     {
     		$db=new \Db(C('GAME_DB'));
-    		$fields="`charid`,`spid`,`sbid`,`userid`,`account`,`charname`,`serverid`,`charlevel`,`gold`,`guildid`,`charstate`,`createtime`,`updatetime`,`loginip`,`viplv`,`vipexp`,`castlelevel`,`countryid`,`firstrechargetime`,`firstrechargelevel`,`totalrecharge`";
+    		$fields="`charid`,`spid`,`sbid`,`userid`,`account`,`charname`,`serverid`,`charlevel`,`gold`,`guildid`,`guildstatus`,`charstate`,`createtime`,`updatetime`,`loginip`,`viplv`,`vipexp`,`castlelevel`,`countryid`,`firstrechargetime`,`firstrechargelevel`,`totalrecharge`";
     		$errorLogFile=LOG_ROOT.'RoleLog.err'; // 错误日志文件
     		$EventLogPath=C('EVENT_LOG_PATH');	// 行为日志目录
     		
@@ -23,6 +23,7 @@ class Role
     		$updates.="`charlevel`=values(`charlevel`),";
     		$updates.="`gold`=values(`gold`),";
     		$updates.="`guildid`=values(`guildid`),";
+    		$updates.="`guildstatus`=values(`guildstatus`),";
     		$updates.="`charstate`=values(`charstate`),";
     		$updates.="`updatetime`=values(`updatetime`),";
     		$updates.="`loginip`=values(`loginip`),";
@@ -89,6 +90,7 @@ class Role
     									$charlevel=$row[7];
     									$gold=$row[11];
     									$guildid=$row[12];
+    									$guildstatus=$row[13];
     									$charstate=0;
     									$createtime=($row[22]?$row[22]:date('Y-m-d H:i:s'));
     									$updatetime=($row[22]?$row[22]:date('Y-m-d H:i:s'));
@@ -97,9 +99,9 @@ class Role
     									$vipexp=0;
     									$castlelevel=$row[4]+0;
     									$countryid=$row[5]+0;
-    									$firstrechargetime=$row[13];
-    									$firstrechargelevel=$row[14]+0;
-    									$totalrecharge=$row[15]+0;
+    									$firstrechargetime=$row[14];
+    									$firstrechargelevel=$row[15]+0;
+    									$totalrecharge=$row[16]+0;
     									
     									$values="('{$charid}',";
     									$values.="'{$spid}',";

@@ -54,16 +54,20 @@ class GameCharLevelDistController extends BaseController
         
         $pieData=[];
         $lineData=[];
+        $totalNums=0;
+        
         foreach ($rows as $row){
+            $totalNums+=$row['nums'];
+            
         	$level=$row['charlevel']."级";
-        	$pieData[]=[$level,$row['nums']];
+        	$pieData[]=[$level,$row['nums']+0];
         	$lineData['x'][]=$level;
         	$lineData['y'][0]['name']='人数';
         	$lineData['y'][0]['data'][]=$row['nums']+0;
         }
 
         return $this->render('index', [
-            'dataSet'=>['pieData'=>$pieData,'lineData'=>$lineData],
+                'dataSet'=>['pieData'=>$pieData,'lineData'=>$lineData,'totalNums'=>$totalNums,'tableData'=>$pieData],
             'query'=>$querys,
         ]);
     }

@@ -64,8 +64,29 @@ $modelLabel = new \backend\models\GameDayOnlineTime();
           			<div id="chat-pie">没有数据!</div>
           		</div>
           	</div>
-          	
           	<!-- row end -->
+          	
+          	<div class="table-responsive">
+          		<table class="table table-borered">
+          			<caption>在线时长(min)</caption>
+          			<thead>
+          				<tr>
+          					<th>时长(min)</th>
+          					<th>人数</th>
+          				</tr>
+          			</thead>
+          			<tbody>
+          				<?php foreach ($dataSet['tableData'] as $row):?>
+          				<tr>
+          					<td><?=$row[0]?></td>
+          					<td><?=$row[1]?></td>
+          				</tr>
+          				<?php endforeach;?>
+          			</tbody>
+          		</table>
+          	
+          	</div>
+          	
         </div>
         </div>
         <!-- /.box-body -->
