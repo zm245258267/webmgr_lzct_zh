@@ -61,6 +61,7 @@ $modelLabel = new \backend\models\AdminUser();
 		      echo '<th><input id="data_table_check" type="checkbox"></th>';
               echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('id').'</th>';
               echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('uname').'</th>';
+              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('role_name').'</th>';
 //               echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('password').'</th>';
 //               echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('auth_key').'</th>';
               echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('last_ip').'</th>';
@@ -86,6 +87,7 @@ $modelLabel = new \backend\models\AdminUser();
                 echo '  <td><label><input type="checkbox" value="' . $model->id . '"></label></td>';
                 echo '  <td>' . $model->id . '</td>';
                 echo '  <td>' . $model->uname . '</td>';
+                echo '  <td>' . $model->role_name . '</td>';
 //                 echo '  <td>' . $model->password . '</td>';
 //                 echo '  <td>' . $model->auth_key . '</td>';
                 echo '  <td>' . $model->last_ip . '</td>';
@@ -297,6 +299,7 @@ $modelLabel = new \backend\models\AdminUser();
 	if(type == 'create'){
 		$("#id").val('');
 		$("#uname").val('');
+		$("#role_id").val('');
 		$("#password").val('');
 		$("#auth_key").val('');
 		$("#last_ip").val('');
@@ -312,6 +315,7 @@ $modelLabel = new \backend\models\AdminUser();
 	else{
 		$("#id").val(data.id);
     	$("#uname").val(data.uname);
+    	$("#role_id").val(data.role_id);
     	$("#password").val(data.password);
     	$("#auth_key").val(data.auth_key);
     	$("#last_ip").val(data.last_ip);
@@ -326,6 +330,7 @@ $modelLabel = new \backend\models\AdminUser();
 	if(type == "view"){
       $("#id").attr({readonly:true,disabled:true});
       $("#uname").attr({readonly:true,disabled:true});
+      $("#role_id").attr({readonly:true,disabled:true});
       $("#password").attr({readonly:true,disabled:true});
       $("#password").parent().parent().hide();
       $("#auth_key").attr({readonly:true,disabled:true});
@@ -342,6 +347,7 @@ $modelLabel = new \backend\models\AdminUser();
 	}
 	else{
       $("#id").attr({readonly:false,disabled:false});
+      $("#role_id").attr({readonly:false,disabled:false});
       $("#uname").attr({readonly:true,disabled:true});
       if(type == "create"){
     	  $("#uname").attr({readonly:false,disabled:false});
@@ -491,10 +497,10 @@ $('#admin-user-form').bind('submit', function(e) {
         		window.location.reload();
         	}
         	else{
+            	value.msg && alert(value.msg);
             	var json = value.data;
         		for(var key in json){
         			$('#' + key).attr({'data-placement':'bottom', 'data-content':json[key], 'data-toggle':'popover'}).addClass('popover-show').popover('show');
-        			
         		}
         	}
 

@@ -319,4 +319,18 @@ class CommonFun extends Object{
     	}
     	return $result;
     }
+    
+    /**
+     * 模型错误信息转字符串
+     * @param array $errors
+     * @return string
+     */
+    public static function modelErrorsToString($errors){
+        if (empty($errors))return '';
+        $errorString='';
+        foreach ($errors as $error){
+            $errorString.=implode(" ", $error);
+        }
+        return $errorString;
+    }
 }

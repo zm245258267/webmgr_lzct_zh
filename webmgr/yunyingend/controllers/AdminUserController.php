@@ -2,10 +2,13 @@
 
 namespace backend\controllers;
 
+use backend\services\AdminUserRoleService;
+
 use Yii;
 use yii\data\Pagination;
 use backend\models\AdminUser;
 use yii\web\NotFoundHttpException;
+use yii\db\Transaction;
 use backend\models\AdminUserRole;
 
 /**
@@ -21,6 +24,7 @@ class AdminUserController extends BaseController
      */
     public function actionIndex()
     {
+        AdminUser::$tableName='view_admin_user';
         $query = AdminUser::find();
          $querys = Yii::$app->request->get('query');
         if(count($querys) > 0){
@@ -68,7 +72,9 @@ class AdminUserController extends BaseController
     public function actionView($id)
     {
         //$id = Yii::$app->request->post('id');
-        $model = $this->findModel($id);
+//         $model = $this->findModel($id);
+        AdminUser::$tableName='view_admin_user';
+        $model=AdminUser::find()->where(['id'=>$id])->one();
         echo json_encode($model->getAttributes());
 
     }
@@ -94,21 +100,39 @@ class AdminUserController extends BaseController
             $model->create_user = Yii::$app->user->identity->uname;
             $model->create_date = date('Y-m-d H:i:s');
             $model->update_user = Yii::$app->user->identity->uname;
-            $model->update_date = date('Y-m-d H:i:s');            
-            if($model->validate() == true && $model->save()){
+            $model->update_date = date('Y-m-d H:i:s');
+            
+            // 开启事务
+            $transaction=$model->getDb()->beginTransaction(Transaction::SERIALIZABLE);
+            
+            try {
                 
-                // 关联用户角色
-                $userRole=new AdminUserRole();
-                $userRole->load(['form-data'=>['user_id'=>$model->id,'role_id'=>$rq->post('role_id')]]);
-                $userRole->validate() && $userRole->save();
+                if($model->validate() == true && $model->save()){
+                    // 关联用户角色
+                    $role_id=$rq->post('role_id');
+                    if ($role_id>0){
+                        $errorMsg='';
+                        if((new AdminUserRoleService())->saveUserRole($model->id, $role_id,$errorMsg)===false){
+                            throw new \Exception('角色关联失败,请尝试刷新重试。'.$errorMsg);
+                        }
+                    }
+                    
+                    $msg = array('errno'=>0, 'msg'=>'保存成功');
+                    echo json_encode($msg);
+                    
+                }else{
+                    $msg = array('errno'=>2, 'data'=>$model->getErrors());
+                    echo json_encode($msg);
+                }
                 
-                $msg = array('errno'=>0, 'msg'=>'保存成功');
+                $transaction->commit();
+            }catch (\Exception $e){
+                $transaction->rollBack();
+                
+                $msg = array('errno'=>2, 'msg'=>"添加失败。".$e->getMessage());
                 echo json_encode($msg);
             }
-            else{
-                $msg = array('errno'=>2, 'data'=>$model->getErrors());
-                echo json_encode($msg);
-            }
+            
         } else {
             $msg = array('errno'=>2, 'msg'=>'数据出错');
             echo json_encode($msg);
@@ -123,23 +147,47 @@ class AdminUserController extends BaseController
      */
     public function actionUpdate()
     {
+    	$rq=Yii::$app->request;
         $id = Yii::$app->request->post('id');
         $model = $this->findModel($id);
+        
         if ($model->load(Yii::$app->request->post())) {
               
             //$model->is_online = 'n';
             //$model->status = 10;
             $model->update_user = Yii::$app->user->identity->uname;
-            $model->update_date = date('Y-m-d H:i:s');        
-        
-            if($model->validate() == true && $model->save()){
-                $msg = array('errno'=>0, 'msg'=>'保存成功');
+            $model->update_date = date('Y-m-d H:i:s');
+            
+            $transaction=$model->getDb()->beginTransaction(Transaction::SERIALIZABLE);
+            
+            try {
+                if($model->validate() == true && $model->save()){
+                    // 关联用户角色
+                    $role_id=$rq->post('role_id');
+                    if ($role_id>0){
+                        $errorMsg='';
+                        if((new AdminUserRoleService())->saveUserRole($model->id, $role_id,$errorMsg)===false){
+                            throw new \Exception('角色关联失败,请尝试刷新重试。'.$errorMsg);
+                        }
+                    }else{
+                        AdminUserRole::deleteAll(['user_id'=>$model->id]);
+                    }
+                    
+                    $msg = array('errno'=>0, 'msg'=>'保存成功');
+                    echo json_encode($msg);
+                }
+                else{
+                    $msg = array('errno'=>2, 'data'=>$model->getErrors());
+                    echo json_encode($msg);
+                }
+                
+                $transaction->commit();
+            }catch (\Exception $e){
+                $transaction->rollBack();
+                $msg = array('errno'=>3, 'msg'=>'保存失败。'.$e->getMessage());
                 echo json_encode($msg);
             }
-            else{
-                $msg = array('errno'=>2, 'data'=>$model->getErrors());
-                echo json_encode($msg);
-            }
+            
         } else {
             $msg = array('errno'=>2, 'msg'=>'数据出错');
             echo json_encode($msg);

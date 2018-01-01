@@ -24,11 +24,16 @@ use backend\models\AdminUserRole;
  */
 class AdminUser extends BackendUser
 {
+    public static $tableName;
+    
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
+        if (self::$tableName){
+            return self::$tableName;
+        }
         return 'admin_user';
     }
 
@@ -45,7 +50,8 @@ class AdminUser extends BackendUser
             [['password'], 'string', 'max' => 200],
             [['auth_key', 'last_ip'], 'string', 'max' => 50],
             [['is_online'], 'string', 'max' => 1],
-            [['update_user'], 'string', 'max' => 101]
+            [['update_user'], 'string', 'max' => 101],
+            [['uname'],'unique']
         ];
     }
 
@@ -55,6 +61,8 @@ class AdminUser extends BackendUser
     public function attributeLabels()
     {
         return [
+            'role_name' => '角色名',
+            'role_id' => '角色ID',
             'id' => 'ID',
             'uname' => '用户名',
             'password' => '密码',
