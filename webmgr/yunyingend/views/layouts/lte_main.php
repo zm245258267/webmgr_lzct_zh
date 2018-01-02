@@ -328,7 +328,7 @@ if($otherMenu == false){
       <b>Version</b> <?=Yii::$app->params['appVersion']?>
     </div>
     <strong>Copyright &copy; 2017-<?=date('Y')?> <a href="<?=Yii::$app->params['homePage']?>"><?=Yii::$app->params['appName']?></a>.</strong> All rights
-    reserved.
+    reserved. <a href="http://www.miitbeian.gov.cn" target="_blank">粤ICP备17166389</a>
   </footer>
 
   <!-- Control Sidebar -->
