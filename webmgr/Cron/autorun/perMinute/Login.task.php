@@ -58,7 +58,7 @@ class Login
     								$account=$row[3];
     								$platform=$row['11'];
     								$mac=$row['13'];
-    								$ip=$row[10];
+    								$ip=ip2long($row[10]);
     								$clientVersion=$row[14];
     								$sbid=$row[21];
     								$logdate=$row[22];
