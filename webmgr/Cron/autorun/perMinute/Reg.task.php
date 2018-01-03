@@ -57,8 +57,10 @@ class Reg
     								$clientVersion=$row[14];
     								$sbid=$row[21];
     								$logdate=$row[22];
+    								$charid=$row[1];
+    								$charname=$row[2];
     								
-    								$params="'{$serverId}','{$account}','{$platform}','{$mac}','{$ip}','{$clientVersion}','1','{$sbid}','{$logdate}'";
+    								$params="'{$serverId}','{$account}','{$charid}','{$charname}','{$platform}','{$mac}','{$ip}','{$clientVersion}','1','{$sbid}','{$logdate}'";
     								$sql="call proc_record_game_user_login({$params})";
     								$db->execute($sql);
     								$error=$db->getError();

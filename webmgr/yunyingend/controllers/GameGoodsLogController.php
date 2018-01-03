@@ -61,7 +61,7 @@ class GameGoodsLogController extends BaseController
 
         $pagination = new Pagination([
             'totalCount' =>$query->count(), 
-            'pageSize' => '10', 
+            'pageSize' => (\Yii::$app->params['pageSize']?\Yii::$app->params['pageSize']:10), 
             'pageParam'=>'page', 
             'pageSizeParam'=>'per-page']
         );
@@ -126,7 +126,7 @@ class GameGoodsLogController extends BaseController
         	$query->andWhere(['in','server',explode(",", $serverId)]);
         }
         
-        $query->groupBy(['module_type','goods_id']);
+        $query->groupBy(['module_sub_type','goods_id']);
 
         $pagination = new Pagination([
             'totalCount' =>$query->count(), 
@@ -143,7 +143,7 @@ class GameGoodsLogController extends BaseController
         }
         
         $models = $query
-        ->select(['module_type','goods_id','sum(`goods_num`) goods_num','sum(`totalprice`) totalprice','count(*) times','count(distinct `account`) persons'])
+        ->select(['module_sub_type','goods_id','sum(`goods_num`) goods_num','sum(`totalprice`) totalprice','count(*) times','count(distinct `account`) persons'])
         ->offset($pagination->offset)
         ->limit($pagination->limit)
         ->asArray()

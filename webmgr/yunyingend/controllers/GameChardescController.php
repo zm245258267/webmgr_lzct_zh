@@ -13,6 +13,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\VarDumper;
 
 /**
  * GameChardescController implements the CRUD actions for GameChardesc model.
@@ -30,6 +31,7 @@ class GameChardescController extends BaseController
         $query = GameChardesc::find();
          $querys = Yii::$app->request->get('query');
          $serverId = Yii::$app->request->get('serverId');
+         
         if(count($querys) > 0){
             $condition = "";
             $parame = array();
@@ -62,7 +64,7 @@ class GameChardescController extends BaseController
         
         $pagination = new Pagination([
             'totalCount' =>$totalCount, 
-            'pageSize' => '10', 
+            'pageSize' => (\Yii::$app->params['pageSize']?\Yii::$app->params['pageSize']:10), 
             'pageParam'=>'page', 
             'pageSizeParam'=>'per-page']
         );

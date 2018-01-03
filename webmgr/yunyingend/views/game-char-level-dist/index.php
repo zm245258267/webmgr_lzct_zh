@@ -1,9 +1,6 @@
 
 <?php
-use yii\widgets\LinkPager;
-use yii\base\Object;
 use yii\bootstrap\ActiveForm;
-use common\utils\CommonFun;
 use yii\helpers\Url;
 
 use backend\models\GameChardesc;
@@ -64,7 +61,7 @@ $modelLabel = new \backend\models\GameChardesc();
           	
           	<div class="table-responsive">
               	<table class="table table-bordered table-hover">
-              		<caption>等级流失</caption>
+              		<caption>领主等级流失</caption>
               		<thead>
               			<tr>
               				<th>等级</th>
@@ -73,11 +70,11 @@ $modelLabel = new \backend\models\GameChardesc();
               			</tr>
               		</thead>
               		<tbody>
-              			<?php foreach ($dataSet['tableData'] as $row):?>
+              			<?php foreach ($charData['tableData'] as $row):?>
               			<tr>
               				<td><?=$row[0]?></td>
               				<td><?=$row[1]?></td>
-              				<td><?=round($row[1]/$dataSet['totalNums'],4)*100?></td>
+              				<td><?=round($row[1]/$charData['totalNums'],4)*100?>%</td>
               			</tr>
               			<?php endforeach;?>
               		</tbody>
@@ -87,6 +84,47 @@ $modelLabel = new \backend\models\GameChardesc();
           	<!-- row end -->
           	
         </div>
+        
+          <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+          	<!-- row start -->
+          	<div class="row">
+          		<div class="col-sm-12">
+          			<div id="castle-chat-pie">没有数据!</div>
+          		</div>
+          	</div>
+          	
+          	<div class="row">
+          		<div class="col-sm-12">
+          			<div id="castle-chat-line">没有数据!</div>
+          		</div>
+          	</div>
+          	
+          	<div class="table-responsive">
+              	<table class="table table-bordered table-hover">
+              		<caption>城堡等级流失</caption>
+              		<thead>
+              			<tr>
+              				<th>等级</th>
+              				<th>角色数</th>
+              				<th>占比</th>
+              			</tr>
+              		</thead>
+              		<tbody>
+              			<?php foreach ($castleData['tableData'] as $row):?>
+              			<tr>
+              				<td><?=$row[0]?></td>
+              				<td><?=$row[1]?></td>
+              				<td><?=round($row[1]/$castleData['totalNums'],4)*100?>%</td>
+              			</tr>
+              			<?php endforeach;?>
+              		</tbody>
+              	</table>
+          	</div>
+          	
+          	<!-- row end -->
+          	
+        </div>
+        
         </div>
         <!-- /.box-body -->
       </div>
@@ -104,9 +142,13 @@ $modelLabel = new \backend\models\GameChardesc();
  	function searchAction(){
 		$('#game-char-level-dist-search-form').submit();
 	}
-	<?php if (!empty($dataSet['pieData'])):?>
- 	show_simple_line_chart("#chat-line",<?=json_encode($dataSet['lineData'])?>,'等级分布','人数'); 
- 	show_simple_pie_chart("#chat-pie",<?=json_encode($dataSet['pieData'])?>,'等级占比','人数');
+	<?php if (!empty($charData['pieData'])):?>
+ 	show_simple_line_chart("#chat-line",<?=json_encode($charData['lineData'])?>,'领主等级分布','人数'); 
+ 	show_simple_pie_chart("#chat-pie",<?=json_encode($charData['pieData'])?>,'领主等级占比','人数');
+ 	<?php endif;?>
+	<?php if (!empty($castleData['pieData'])):?>
+ 	show_simple_line_chart("#castle-chat-line",<?=json_encode($castleData['lineData'])?>,'城堡等级分布','人数'); 
+ 	show_simple_pie_chart("#castle-chat-pie",<?=json_encode($castleData['pieData'])?>,'城堡等级占比','人数');
  	<?php endif;?>
 </script>
 <?php $this->endBlock(); ?>

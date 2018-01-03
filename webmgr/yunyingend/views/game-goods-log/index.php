@@ -117,8 +117,8 @@ $modelLabel = new \backend\models\GameGoodsLog();
                 echo '  <td>' . $model->account . '</td>';
                 echo '  <td>' . $model->charname . '</td>';
                 echo '  <td>' . $model->charid . '</td>';
-                echo '  <td>' . $model->module_type . '</td>';
-                echo '  <td>' . $model->module_sub_type . '</td>';
+                echo '  <td title="'.$model->module_type.'">' . CommonFun::ModuleIdToName($model->module_type) . '</td>';
+                echo '  <td title="'.$model->module_sub_type.'">' . CommonFun::SubModuleIdToName($model->module_sub_type) . '</td>';
                 echo '  <td>' . ($model->pricetype==1?'金币':'金币') . '</td>';	// @todo 根据游戏定
                 echo '  <td>' . $model->totalprice . '</td>';
                 echo '  <td>' . $model->afteramount . '</td>';

@@ -113,8 +113,8 @@ $modelLabel = new \backend\models\GameGoodsLog();
             <?php
             foreach ($models as $model) {
                 echo '<tr id="rowid_">';
-                echo '  <td>' . CommonFun::GoodsIdToName($model->goods_id) . '</td>';
-                echo '  <td>' . CommonFun::ModuleIdToName($model->module_type) . '</td>';
+                echo '  <td title="'.$model->goods_id.'">' . CommonFun::GoodsIdToName($model->goods_id) . '</td>';
+                echo '  <td title="'.$model->module_sub_type.'">' . CommonFun::SubModuleIdToName($model->module_sub_type) . '</td>';
                 echo '  <td>' . $model->totalprice . '</td>';
                 echo '  <td>' . $model->persons . '</td>';
                 echo '  <td>' . $model->times . '</td>';

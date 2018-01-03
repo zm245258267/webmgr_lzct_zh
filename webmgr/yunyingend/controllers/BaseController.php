@@ -26,6 +26,11 @@ class BaseController extends Controller
             	$GameServerGroup->leftJoin('game_server','game_server_group.id=game_server.groupId');
             	$queryData=$GameServerGroup->select(["game_server_group.groupName","game_server.*"])->asArray()->all();
             	
+            	// 默认服务器
+            	$defaultServer=[];
+            	$defaultServer['serverId']=$queryData[0]['serverId'];
+            	$defaultServer['serverName']=$queryData[0]['serverName'];
+            	
             	$groupServers=[];
             	foreach ($queryData as $row){
             		$groupServers[$row['groupId']]['groupName']=$row['groupName'];
@@ -35,6 +40,17 @@ class BaseController extends Controller
             	$groupServersParams=[];
             	$groupServersParams['serverId']=\Yii::$app->request->get('serverId');
             	$groupServersParams['serverName']=\Yii::$app->request->get('serverName');
+            	
+            	// 服务器默认选择处理
+            	if(!isset($groupServersParams['serverId'])){
+            	    $groupServersParams['serverId']=$defaultServer['serverId'];
+            	    $groupServersParams['serverName']=$defaultServer['serverName'];
+            	    
+            	    // 重置参数
+            	    $params=\Yii::$app->request->getQueryParams();
+            	    $params['serverId']=$groupServersParams['serverId'];
+            	    \Yii::$app->request->setQueryParams($params);
+            	}
             	
             	$this->view->params['groupServers']=$groupServers;
             	$this->view->params['groupServersParams']=$groupServersParams;

@@ -72,7 +72,7 @@ $modelLabel = new \backend\models\GameChardesc();
             <?php 
               $orderby = isset($_GET['orderby']) ? $_GET['orderby'] : '';
               echo '<th onclick="orderby(\'charid\', \'desc\')" '.CommonFun::sortClass($orderby, 'charid').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('charid').'</th>';
-              echo '<th onclick="orderby(\'userid\', \'desc\')" '.CommonFun::sortClass($orderby, 'userid').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('userid').'</th>';
+//               echo '<th onclick="orderby(\'userid\', \'desc\')" '.CommonFun::sortClass($orderby, 'userid').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('userid').'</th>';
               echo '<th onclick="orderby(\'account\', \'desc\')" '.CommonFun::sortClass($orderby, 'account').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('account').'</th>';
               echo '<th onclick="orderby(\'charname\', \'desc\')" '.CommonFun::sortClass($orderby, 'charname').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('charname').'</th>';
               echo '<th onclick="orderby(\'serverid\', \'desc\')" '.CommonFun::sortClass($orderby, 'serverid').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('serverid').'</th>';
@@ -80,7 +80,7 @@ $modelLabel = new \backend\models\GameChardesc();
               echo '<th onclick="orderby(\'charlevel\', \'desc\')" '.CommonFun::sortClass($orderby, 'charlevel').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('charlevel').'</th>';
               echo '<th onclick="orderby(\'castlelevel\', \'desc\')" '.CommonFun::sortClass($orderby, 'castlelevel').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('castlelevel').'</th>';
               echo '<th onclick="orderby(\'gold\', \'desc\')" '.CommonFun::sortClass($orderby, 'gold').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('gold').'</th>';
-              echo '<th onclick="orderby(\'charstate\', \'desc\')" '.CommonFun::sortClass($orderby, 'charstate').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('charstate').'</th>';
+//               echo '<th onclick="orderby(\'charstate\', \'desc\')" '.CommonFun::sortClass($orderby, 'charstate').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('charstate').'</th>';
               echo '<th onclick="orderby(\'createtime\', \'desc\')" '.CommonFun::sortClass($orderby, 'createtime').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('createtime').'</th>';
               echo '<th onclick="orderby(\'updatetime\', \'desc\')" '.CommonFun::sortClass($orderby, 'updatetime').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('updatetime').'</th>';
          
@@ -94,7 +94,7 @@ $modelLabel = new \backend\models\GameChardesc();
             foreach ($models as $model) {
                 echo '<tr id="rowid_">';
                 echo '  <td>' . $model->charid . '</td>';
-                echo '  <td>' . $model->userid . '</td>';
+//                 echo '  <td>' . $model->userid . '</td>';
                 echo '  <td>' . $model->account . '</td>';
                 echo '  <td>' . $model->charname . '</td>';
                 echo '  <td>' . $model->serverid . '</td>';
@@ -102,7 +102,7 @@ $modelLabel = new \backend\models\GameChardesc();
                 echo '  <td>' . $model->charlevel . '</td>';
                 echo '  <td>' . $model->castlelevel . '</td>';
                 echo '  <td>' . $model->gold . '</td>';
-                echo '  <td>' . $model->charstate . '</td>';
+//                 echo '  <td>' . $model->charstate . '</td>';
                 echo '  <td>' . $model->createtime . '</td>';
                 echo '  <td>' . $model->updatetime . '</td>';
                 //echo '  <td>' . $model->loginip . '</td>';
