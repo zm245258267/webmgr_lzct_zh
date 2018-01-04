@@ -36,3 +36,7 @@ th,td{
 .clear{
 	clear:both;
 }
+
+.cursor-pointer{
+	cursor:pointer;
+}

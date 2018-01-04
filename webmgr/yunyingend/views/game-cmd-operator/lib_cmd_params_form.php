@@ -1,14 +1,14 @@
-<?php for($i=1;$i<11;$i++):?>
-<?php if ($cmdInfo["p{$i}"]):?>
+<?php if ($cmdInfo["settings"]):?>
+<?php foreach (json_decode($cmdInfo["settings"],true) as $settings):?>
 <div class="form-group">
-	<label for="p<?=$i?>" class="col-sm-2 control-label"><?=$cmdInfo["p{$i}"]?>：</label>
+	<label for="<?=$settings['key']?>" class="col-sm-2 control-label"><?=$settings['name']?>：</label>
 	<div class="col-sm-10">
-		<?php if ($cmdInfo["f{$i}"]=='textarea'):?>
-		<textarea rows="3" id="p<?=$i?>" name="params[<?=$i?>]" class="form-control" placeHolder="<?=$cmdInfo["n{$i}"]?>"></textarea>
+		<?php if ($settings["value"]=='textarea'):?>
+		<textarea rows="3" id="<?=$settings['key']?>" name="params[<?=$settings['key']?>]" class="form-control" placeHolder="<?=$settings['desc']?>"></textarea>
 		<?php else: ?>
-		<input type="text" id="p<?=$i?>" name="params[<?=$i?>]" class="form-control" placeHolder="<?=$cmdInfo["n{$i}"]?>" />
+		<input type="text" id="<?=$settings['key']?>" name="params[<?=$settings['key']?>]" class="form-control" placeHolder="<?=$settings["desc"]?>" />
 		<?php endif;?>
 	</div>
 </div>
+<?php endforeach;?>
 <?php endif;?>
-<?php endfor;?>

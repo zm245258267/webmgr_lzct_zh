@@ -70,16 +70,7 @@ $modelLabel = new \backend\models\GameCmd();
               echo '<th onclick="orderby(\'id\', \'desc\')" '.CommonFun::sortClass($orderby, 'id').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('id').'</th>';
               echo '<th onclick="orderby(\'cmd\', \'desc\')" '.CommonFun::sortClass($orderby, 'cmd').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('cmd').'</th>';
               echo '<th onclick="orderby(\'name\', \'desc\')" '.CommonFun::sortClass($orderby, 'name').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('name').'</th>';
-              echo '<th onclick="orderby(\'p1\', \'desc\')" '.CommonFun::sortClass($orderby, 'p1').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('p1').'</th>';
-              echo '<th onclick="orderby(\'p2\', \'desc\')" '.CommonFun::sortClass($orderby, 'p2').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('p2').'</th>';
-              echo '<th onclick="orderby(\'p3\', \'desc\')" '.CommonFun::sortClass($orderby, 'p3').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('p3').'</th>';
-              echo '<th onclick="orderby(\'p4\', \'desc\')" '.CommonFun::sortClass($orderby, 'p4').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('p4').'</th>';
-              echo '<th onclick="orderby(\'p5\', \'desc\')" '.CommonFun::sortClass($orderby, 'p5').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('p5').'</th>';
-              echo '<th onclick="orderby(\'p6\', \'desc\')" '.CommonFun::sortClass($orderby, 'p6').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('p6').'</th>';
-              echo '<th onclick="orderby(\'p7\', \'desc\')" '.CommonFun::sortClass($orderby, 'p7').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('p7').'</th>';
-              echo '<th onclick="orderby(\'p8\', \'desc\')" '.CommonFun::sortClass($orderby, 'p8').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('p8').'</th>';
-              echo '<th onclick="orderby(\'p9\', \'desc\')" '.CommonFun::sortClass($orderby, 'p9').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('p9').'</th>';
-              echo '<th onclick="orderby(\'p10\', \'desc\')" '.CommonFun::sortClass($orderby, 'p10').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('p10').'</th>';
+              echo '<th onclick="orderby(\'settings\', \'desc\')" '.CommonFun::sortClass($orderby, 'settings').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('settings').'</th>';
               echo '<th onclick="orderby(\'notes\', \'desc\')" '.CommonFun::sortClass($orderby, 'notes').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('notes').'</th>';
               echo '<th onclick="orderby(\'record_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'record_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('record_time').'</th>';
          
@@ -97,26 +88,7 @@ $modelLabel = new \backend\models\GameCmd();
                 echo '  <td>' . $model->id . '</td>';
                 echo '  <td>' . $model->cmd . '</td>';
                 echo '  <td>' . $model->name . '</td>';
-                echo '  <td>' . $model->p1 . '</td>';
-                echo '  <td>' . $model->p2 . '</td>';
-                echo '  <td>' . $model->p3 . '</td>';
-                echo '  <td>' . $model->p4 . '</td>';
-                echo '  <td>' . $model->p5 . '</td>';
-                echo '  <td>' . $model->p6 . '</td>';
-                echo '  <td>' . $model->p7 . '</td>';
-                echo '  <td>' . $model->p8 . '</td>';
-                echo '  <td>' . $model->p9 . '</td>';
-                echo '  <td>' . $model->p10 . '</td>';
-                //echo '  <td>' . $model->f1 . '</td>';
-                //echo '  <td>' . $model->f2 . '</td>';
-                //echo '  <td>' . $model->f3 . '</td>';
-                //echo '  <td>' . $model->f4 . '</td>';
-                //echo '  <td>' . $model->f5 . '</td>';
-                //echo '  <td>' . $model->f6 . '</td>';
-                //echo '  <td>' . $model->f7 . '</td>';
-                //echo '  <td>' . $model->f8 . '</td>';
-                //echo '  <td>' . $model->f9 . '</td>';
-                //echo '  <td>' . $model->f10 . '</td>';
+                echo '  <td><div title="'.$model->settings.'">' . $model->settings . '</div></td>';
                 echo '  <td>' . $model->notes . '</td>';
                 echo '  <td>' . $model->record_time . '</td>';
                 echo '  <td class="center">';
@@ -200,143 +172,27 @@ $modelLabel = new \backend\models\GameCmd();
               </div>
               <div class="clearfix"></div>
           </div>
+          
+          <hr>
 
-          <div id="p1_div" class="form-group">
-              <label for="p1" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("p1")?></label>
-              <div class="col-sm-6">
-                  <input type="text" class="form-control" id="p1" name="GameCmd[p1]" placeholder="" />
+          <div class="form-group setting-cmd-params">
+          		<div class="col-sm-12">
+          			<input type="text" class="form-control" name="GameCmd[settings][name][]" placeholder="参数名，必填" />
+          		</div>
+              <div class="col-sm-12">
+                  <input type="text" class="form-control" name="GameCmd[settings][key][]" placeholder="参数KEY，必填" />
               </div>
-              <div class="col-sm-4">
-              	<select id="f1" class="form-control" name="GameCmd[f1]">
-              		<option value="input">input</option>
-              		<option value="textarea">textarea</option>
+              <div class="col-sm-12">
+                  <input type="text" class="form-control" name="GameCmd[settings][desc][]" placeholder="参数描述" />
+              </div>
+              <div class="col-sm-12">
+              	<select class="form-control" name="GameCmd[settings][value][]">
+              		<option value="input">参数值单行</option>
+              		<option value="textarea">参数值多行</option>
               	</select>
               </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="p2_div" class="form-group">
-              <label for="p2" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("p2")?></label>
-              <div class="col-sm-6">
-                  <input type="text" class="form-control" id="p2" name="GameCmd[p2]" placeholder="" />
-              </div>
-              <div class="col-sm-4">
-              	<select id="f2" class="form-control" name="GameCmd[f2]">
-              		<option value="input">input</option>
-              		<option value="textarea">textarea</option>
-              	</select>
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="p3_div" class="form-group">
-              <label for="p3" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("p3")?></label>
-              <div class="col-sm-6">
-                  <input type="text" class="form-control" id="p3" name="GameCmd[p3]" placeholder="" />
-              </div>
-              <div class="col-sm-4">
-              	<select id="f3" class="form-control" name="GameCmd[f3]">
-              		<option value="input">input</option>
-              		<option value="textarea">textarea</option>
-              	</select>
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="p4_div" class="form-group">
-              <label for="p4" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("p4")?></label>
-              <div class="col-sm-6">
-                  <input type="text" class="form-control" id="p4" name="GameCmd[p4]" placeholder="" />
-              </div>
-              <div class="col-sm-4">
-              	<select id="f4" class="form-control" name="GameCmd[f4]">
-              		<option value="input">input</option>
-              		<option value="textarea">textarea</option>
-              	</select>
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="p5_div" class="form-group">
-              <label for="p5" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("p5")?></label>
-              <div class="col-sm-6">
-                  <input type="text" class="form-control" id="p5" name="GameCmd[p5]" placeholder="" />
-              </div>
-              <div class="col-sm-4">
-              	<select id="f5" class="form-control" name="GameCmd[f5]">
-              		<option value="input">input</option>
-              		<option value="textarea">textarea</option>
-              	</select>
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="p6_div" class="form-group">
-              <label for="p6" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("p6")?></label>
-              <div class="col-sm-6">
-                  <input type="text" class="form-control" id="p6" name="GameCmd[p6]" placeholder="" />
-              </div>
-              <div class="col-sm-4">
-              	<select id="f6" class="form-control" name="GameCmd[f6]">
-              		<option value="input">input</option>
-              		<option value="textarea">textarea</option>
-              	</select>
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="p7_div" class="form-group">
-              <label for="p7" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("p7")?></label>
-              <div class="col-sm-6">
-                  <input type="text" class="form-control" id="p7" name="GameCmd[p7]" placeholder="" />
-              </div>
-              <div class="col-sm-4">
-              	<select id="f7" class="form-control" name="GameCmd[f7]">
-              		<option value="input">input</option>
-              		<option value="textarea">textarea</option>
-              	</select>
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="p8_div" class="form-group">
-              <label for="p8" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("p8")?></label>
-              <div class="col-sm-6">
-                  <input type="text" class="form-control" id="p8" name="GameCmd[p8]" placeholder="" />
-              </div>
-              <div class="col-sm-4">
-              	<select id="f8" class="form-control" name="GameCmd[f8]">
-              		<option value="input">input</option>
-              		<option value="textarea">textarea</option>
-              	</select>
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="p9_div" class="form-group">
-              <label for="p9" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("p9")?></label>
-              <div class="col-sm-6">
-                  <input type="text" class="form-control" id="p9" name="GameCmd[p9]" placeholder="" />
-              </div>
-              <div class="col-sm-4">
-              	<select id="f9" class="form-control" name="GameCmd[f9]">
-              		<option value="input">input</option>
-              		<option value="textarea">textarea</option>
-              	</select>
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="p10_div" class="form-group">
-              <label for="p10" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("p10")?></label>
-              <div class="col-sm-6">
-                  <input type="text" class="form-control" id="p10" name="GameCmd[p10]" placeholder="" />
-              </div>
-              <div class="col-sm-4">
-              	<select id="f10" class="form-control" name="GameCmd[f10]">
-              		<option value="input">input</option>
-              		<option value="textarea">textarea</option>
-              	</select>
+              <div class="col-sm-12">
+              	<span class="cursor-pointer pull-right operator-plus"> + </span>
               </div>
               <div class="clearfix"></div>
           </div>
@@ -394,6 +250,7 @@ function orderby(field, op){
 		$('#game-cmd-search-form').submit();
 	}
  function viewAction(id){
+     	$(".setting-cmd-params .operator-minus").parent().parent().remove();
 		initModel(id, 'view', 'fun');
 	}
 
@@ -402,114 +259,67 @@ function orderby(field, op){
 		$("#id").val('');
 		$("#cmd").val('');
 		$("#name").val('');
-		$("#p1").val('');
-		$("#p2").val('');
-		$("#p3").val('');
-		$("#p4").val('');
-		$("#p5").val('');
-		$("#p6").val('');
-		$("#p7").val('');
-		$("#p8").val('');
-		$("#p9").val('');
-		$("#p10").val('');
-		$("#f1").val('');
-		$("#f2").val('');
-		$("#f3").val('');
-		$("#f4").val('');
-		$("#f5").val('');
-		$("#f6").val('');
-		$("#f7").val('');
-		$("#f8").val('');
-		$("#f9").val('');
-		$("#f10").val('');
 		$("#notes").val('');
 		$("#record_time").val('');
-		
 	}
 	else{
 		$("#id").val(data.id);
     	$("#cmd").val(data.cmd);
     	$("#name").val(data.name);
-    	$("#p1").val(data.p1);
-    	$("#p2").val(data.p2);
-    	$("#p3").val(data.p3);
-    	$("#p4").val(data.p4);
-    	$("#p5").val(data.p5);
-    	$("#p6").val(data.p6);
-    	$("#p7").val(data.p7);
-    	$("#p8").val(data.p8);
-    	$("#p9").val(data.p9);
-    	$("#p10").val(data.p10);
-    	$("#f1").val(data.f1);
-    	$("#f2").val(data.f2);
-    	$("#f3").val(data.f3);
-    	$("#f4").val(data.f4);
-    	$("#f5").val(data.f5);
-    	$("#f6").val(data.f6);
-    	$("#f7").val(data.f7);
-    	$("#f8").val(data.f8);
-    	$("#f9").val(data.f9);
-    	$("#f10").val(data.f10);
     	$("#notes").val(data.notes);
     	$("#record_time").val(data.record_time);
+
+    	eval('var settings='+data.settings);
+    	if(typeof settings=='object'){
+        	for(var i in settings){
+        		if(i==0){
+        		    $(".setting-cmd-params input[name*=name]").val(settings[i]['name']);
+        			$(".setting-cmd-params input[name*=key]").val(settings[i]['key']);
+        			$(".setting-cmd-params input[name*=desc]").val(settings[i]['desc']);
+        			$(".setting-cmd-params select[name*=value]").val(settings[i]['value']);
+        		}else{
+        		    $(".operator-plus").parent().parent().clone(false)
+        		    .find('.operator-plus')
+        			.removeClass('operator-plus')
+        			.addClass('operator-minus')
+        			.html(' - ')
+        			.bind("click",function(){$(this).parent().parent().remove();})
+        			.end()
+        			.find("input[name*=name]").val(settings[i]['name'])
+        			.end()
+        			.find("input[name*=key]").val(settings[i]['key'])
+        			.end()
+        			.find("input[name*=desc]").val(settings[i]['desc'])
+        			.end()
+        			.find("select[name*=value]").val(settings[i]['value'])
+        			.end()
+        			.insertBefore($("#notes_div"));
+        		}
+    		}
     	}
+    }
 	if(type == "view"){
       $("#id").attr({readonly:true,disabled:true});
       $("#cmd").attr({readonly:true,disabled:true});
       $("#name").attr({readonly:true,disabled:true});
-      $("#p1").attr({readonly:true,disabled:true});
-      $("#p2").attr({readonly:true,disabled:true});
-      $("#p3").attr({readonly:true,disabled:true});
-      $("#p4").attr({readonly:true,disabled:true});
-      $("#p5").attr({readonly:true,disabled:true});
-      $("#p6").attr({readonly:true,disabled:true});
-      $("#p7").attr({readonly:true,disabled:true});
-      $("#p8").attr({readonly:true,disabled:true});
-      $("#p9").attr({readonly:true,disabled:true});
-      $("#p10").attr({readonly:true,disabled:true});
-      $("#f1").attr({readonly:true,disabled:true});
-      $("#f2").attr({readonly:true,disabled:true});
-      $("#f3").attr({readonly:true,disabled:true});
-      $("#f4").attr({readonly:true,disabled:true});
-      $("#f5").attr({readonly:true,disabled:true});
-      $("#f6").attr({readonly:true,disabled:true});
-      $("#f7").attr({readonly:true,disabled:true});
-      $("#f8").attr({readonly:true,disabled:true});
-      $("#f9").attr({readonly:true,disabled:true});
-      $("#f10").attr({readonly:true,disabled:true});
       $("#notes").attr({readonly:true,disabled:true});
       $("#record_time").attr({readonly:true,disabled:true});
       $("#record_time").parent().parent().show();
-	$('#edit_dialog_ok').addClass('hidden');
+		$('#edit_dialog_ok').addClass('hidden');
+
+		$(".setting-cmd-params input,.setting-cmd-params select").attr({readonly:true,disabled:true});
+		$(".setting-cmd-params span").hide();
 	}
 	else{
       $("#id").attr({readonly:false,disabled:false});
       $("#cmd").attr({readonly:false,disabled:false});
       $("#name").attr({readonly:false,disabled:false});
-      $("#p1").attr({readonly:false,disabled:false});
-      $("#p2").attr({readonly:false,disabled:false});
-      $("#p3").attr({readonly:false,disabled:false});
-      $("#p4").attr({readonly:false,disabled:false});
-      $("#p5").attr({readonly:false,disabled:false});
-      $("#p6").attr({readonly:false,disabled:false});
-      $("#p7").attr({readonly:false,disabled:false});
-      $("#p8").attr({readonly:false,disabled:false});
-      $("#p9").attr({readonly:false,disabled:false});
-      $("#p10").attr({readonly:false,disabled:false});
-      $("#f1").attr({readonly:false,disabled:false});
-      $("#f2").attr({readonly:false,disabled:false});
-      $("#f3").attr({readonly:false,disabled:false});
-      $("#f4").attr({readonly:false,disabled:false});
-      $("#f5").attr({readonly:false,disabled:false});
-      $("#f6").attr({readonly:false,disabled:false});
-      $("#f7").attr({readonly:false,disabled:false});
-      $("#f8").attr({readonly:false,disabled:false});
-      $("#f9").attr({readonly:false,disabled:false});
-      $("#f10").attr({readonly:false,disabled:false});
       $("#notes").attr({readonly:false,disabled:false});
       $("#record_time").attr({readonly:false,disabled:false});
       $("#record_time").parent().parent().hide();
 		$('#edit_dialog_ok').removeClass('hidden');
+		$(".setting-cmd-params input,.setting-cmd-params select").attr({readonly:false,disabled:false});
+		$(".setting-cmd-params span").show();
 		}
 		$('#edit_dialog').modal('show');
 }
@@ -532,6 +342,7 @@ function initModel(id, type, fun){
 }
 	
 function editAction(id){
+    $(".setting-cmd-params .operator-minus").parent().parent().remove();
 	initModel(id, 'edit');
 }
 
@@ -639,6 +450,18 @@ $('#game-cmd-form').bind('submit', function(e) {
     });
 });
 
- 
+$(function(){
+    $(".operator-plus").bind("click",function(){
+		$(this).parent().parent().clone(false)
+		.find('.operator-plus')
+		.removeClass('operator-plus')
+		.addClass('operator-minus')
+		.html(' - ')
+		.bind("click",function(){$(this).parent().parent().remove();})
+		.end()
+		.insertBefore($("#notes_div"));
+	});
+});
+
 </script>
 <?php $this->endBlock(); ?>

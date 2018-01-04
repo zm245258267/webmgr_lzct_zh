@@ -1,9 +1,5 @@
 
 <?php
-use yii\widgets\LinkPager;
-use yii\base\Object;
-use yii\bootstrap\ActiveForm;
-use common\utils\CommonFun;
 use yii\helpers\Url;
 
 use backend\models\GameCmd;

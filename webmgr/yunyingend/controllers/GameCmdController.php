@@ -5,10 +5,8 @@ namespace backend\controllers;
 use Yii;
 use yii\data\Pagination;
 use backend\models\GameCmd;
-use yii\data\ActiveDataProvider;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+use backend\services\GameCmdService;
 
 /**
  * GameCmdController implements the CRUD actions for GameCmd model.
@@ -88,12 +86,14 @@ class GameCmdController extends BaseController
      */
     public function actionCreate()
     {
-        $model = new GameCmd();
-        if ($model->load(Yii::$app->request->post())) {
+        $rq=Yii::$app->request;
+        $params=$rq->post();
         
-//               if(empty($model->record_time) == true){
-//                   $model->record_time = 'CURRENT_TIMESTAMP';
-//               }
+        // 配置参数处理
+        $params['GameCmd']['settings']=(new GameCmdService())->formatFormSettings($params['GameCmd']['settings']);
+        
+        $model = new GameCmd();
+        if ($model->load($params)) {
         
             if($model->validate() == true && $model->save()){
                 $msg = array('errno'=>0, 'msg'=>'保存成功');
@@ -117,13 +117,13 @@ class GameCmdController extends BaseController
      */
     public function actionUpdate()
     {
-        $id = Yii::$app->request->post('id');
-        $model = $this->findModel($id);
-        if ($model->load(Yii::$app->request->post())) {
+        $rq=Yii::$app->request;
+        $params=$rq->post();
+        $params['GameCmd']['settings']=(new GameCmdService())->formatFormSettings($params['GameCmd']['settings']);
         
-//              if(empty($model->record_time) == true){
-//                  $model->record_time = 'CURRENT_TIMESTAMP';
-//              }        
+        $id = $rq->post('id');
+        $model = $this->findModel($id);
+        if ($model->load($params)) {
         
             if($model->validate() == true && $model->save()){
                 $msg = array('errno'=>0, 'msg'=>'保存成功');

@@ -3,12 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
-use yii\data\Pagination;
 use backend\models\GameCmd;
-use yii\data\ActiveDataProvider;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 use backend\services\GameCmdLogService;
 
 /**
@@ -92,7 +87,7 @@ class GameCmdOperatorController extends BaseController
     }
     
     /**
-     * 执行
+     * 通用GM操作执行
      */
     public function actionCommonOperator(){
     	$Service=new GameCmdLogService();

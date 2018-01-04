@@ -30,11 +30,11 @@ class GameCmdLogService extends GameCmdLog{
 			if (!$fp) {
 				$errmsg="ERROR: $errno - ";
 			} else {
-				if (empty($params)){
+			    if (empty($params) || !is_array($params)){
 					$cmd_data=$cmd;
 				}else{
-					$params=array_map(function($val){return htmlspecialchars(str_ireplace(" ", "&nbsp;", str_ireplace(["\r\n","\n"], "<br>", trim($val))));}, $params);
-					$cmd_data=($cmd." ".implode(" ", $params));
+					$params=array_map(function($val){return htmlspecialchars(str_ireplace(" ", "&nbsp;", str_ireplace(["\r\n","\n"], ";", trim($val))));}, $params);
+					$cmd_data=($cmd." ".json_encode($params));
 				}
 				fwrite($fp, $cmd_data."\r\n");
 				$result=fread($fp, 1024);
