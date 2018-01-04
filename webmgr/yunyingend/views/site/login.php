@@ -36,7 +36,8 @@ use yii\helpers\Url;
       </div>
     <!-- </form>  -->
     <?php ActiveForm::end(); ?>
-
+	<p class="login-box-msg">Copyright &copy; 2017-<?=date('Y')?> <a href="<?=Yii::$app->params['homePage']?>"><?=Yii::$app->params['appName']?></a>. All rights
+    reserved. <a href="http://www.miitbeian.gov.cn" target="_blank">粤ICP备17166389</a></p>
   </div>
   <!-- /.login-box-body -->
 </div>

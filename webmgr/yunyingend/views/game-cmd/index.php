@@ -415,6 +415,8 @@ $('#edit_dialog_ok').click(function (e) {
 
 $('#create_btn').click(function (e) {
     e.preventDefault();
+    $(".setting-cmd-params .operator-minus").parent().parent().remove();
+    $(".setting-cmd-params input,.setting-cmd-params select").val('');
     initEditSystemModule({}, 'create');
 });
 
