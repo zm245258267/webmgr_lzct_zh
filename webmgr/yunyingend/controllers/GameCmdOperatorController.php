@@ -56,7 +56,7 @@ class GameCmdOperatorController extends BaseController
     	}elseif ($cmd==''){
     		$errmsg='请选择操作';
     	}elseif (is_array($params)){
-    		$params=array_filter($params);
+//     		$params=array_filter($params);
     		if (empty($params)){
     			$errmsg="相关参数不能为空";
     		}
