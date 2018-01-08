@@ -3,7 +3,7 @@
 <div class="form-group">
 	<label for="<?=$settings['key']?>" class="col-sm-2 control-label"><?=$settings['name']?>：</label>
 	<div class="col-sm-10">
-		<?php if ($settings["value"]=='textarea'):?>
+		<?php if ($settings["value"]=='textarea' || $settings["value"]=='textarea_array'):?>
 		<textarea rows="3" id="<?=$settings['key']?>" name="params[<?=$settings['key']?>]" class="form-control" placeHolder="<?=$settings['desc']?>"></textarea>
 		<?php else: ?>
 		<input type="text" id="<?=$settings['key']?>" name="params[<?=$settings['key']?>]" class="form-control" placeHolder="<?=$settings["desc"]?>" />

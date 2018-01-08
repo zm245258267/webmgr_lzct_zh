@@ -188,7 +188,14 @@ $modelLabel = new \backend\models\GameCmd();
               <div class="col-sm-12">
               	<select class="form-control" name="GameCmd[settings][value][]">
               		<option value="input">参数值单行</option>
-              		<option value="textarea">参数值多行</option>
+              		<option value="textarea">参数值多行[字符串模式]</option>
+              		<option value="textarea_array">参数值多行[数组模式]</option>
+              	</select>
+              </div>
+              <div class="col-sm-12">
+              	<select class="form-control" name="GameCmd[settings][must][]">
+              		<option value="1">必填</option>
+              		<option value="0">非必填</option>
               	</select>
               </div>
               <div class="col-sm-12">
@@ -277,6 +284,7 @@ function orderby(field, op){
         			$(".setting-cmd-params input[name*=key]").val(settings[i]['key']);
         			$(".setting-cmd-params input[name*=desc]").val(settings[i]['desc']);
         			$(".setting-cmd-params select[name*=value]").val(settings[i]['value']);
+        			$(".setting-cmd-params select[name*=must]").val(settings[i]['must']);
         		}else{
         		    $(".operator-plus").parent().parent().clone(false)
         		    .find('.operator-plus')
@@ -292,6 +300,8 @@ function orderby(field, op){
         			.find("input[name*=desc]").val(settings[i]['desc'])
         			.end()
         			.find("select[name*=value]").val(settings[i]['value'])
+        			.end()
+        			.find("select[name*=must]").val(settings[i]['must'])
         			.end()
         			.insertBefore($("#notes_div"));
         		}

@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use backend\models\GameCmd;
 use backend\services\GameCmdLogService;
+use backend\services\GameCmdService;
 
 /**
  * GameCmdController implements the CRUD actions for GameCmd model.
@@ -55,11 +56,8 @@ class GameCmdOperatorController extends BaseController
     		$errmsg='请选择服务器';
     	}elseif ($cmd==''){
     		$errmsg='请选择操作';
-    	}elseif (is_array($params)){
-//     		$params=array_filter($params);
-    		if (empty($params)){
-    			$errmsg="相关参数不能为空";
-    		}
+    	}elseif (!(new GameCmdService())->validateParams($cmd, $params,$errmsg)){
+    	    $errmsg=($errmsg?$errmsg:"参数错误");
     	}
     	
     	// 操作原因可写可不写

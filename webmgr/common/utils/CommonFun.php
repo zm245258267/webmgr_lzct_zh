@@ -333,4 +333,20 @@ class CommonFun extends Object{
         }
         return $errorString;
     }
+    
+    /**
+     * 多维数组处理
+     * @param callback $filter
+     * @param array $data
+     * @return NULL[]
+     */
+    public static function arrayMapRecursive($filter, $data) {
+        $result = array();
+        foreach ($data as $key => $val) {
+            $result[$key] = is_array($val)
+            ? array_map_recursive($filter, $val)
+            : call_user_func($filter, $val);
+        }
+        return $result;
+    }
 }
