@@ -50,28 +50,21 @@ class GameCmdService extends GameCmd
         $settings = array_shift( $settings );
         
         if (is_array( $params ) && ! empty( $params )) {
-            @$settings = json_decode( $settings );
+            @$settings = json_decode( $settings, true );
+            
+            
             if (is_array( $settings )) {
                 foreach ( $settings as $item ) {
                     if ($item['value'] == 'textarea_array') {
                         if (isset( $params[$item['key']] )) {
-                            $params[$item['key']] = str_replace( [ 
-                                    "\r\n",
-                                    "\n" 
-                            ], "\r\n", $params[$item['key']] );
                             $params[$item['key']] = explode( "\r\n", $params[$item['key']] );
                         }
                     }
                 }
             }
             
-            $replace = [ 
-                    "\r\n",
-                    "\n" 
-            ];
-            
             $callback = function ($val) {
-                return str_replace( $replace, "<br />", $val );
+                return str_replace( "\r\n", "<br />", $val );
             };
             
             $params = CommonFun::arrayMapRecursive( $callback, $params );

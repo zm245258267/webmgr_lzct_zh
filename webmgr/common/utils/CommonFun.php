@@ -344,7 +344,7 @@ class CommonFun extends Object{
         $result = array();
         foreach ($data as $key => $val) {
             $result[$key] = is_array($val)
-            ? array_map_recursive($filter, $val)
+            ? self::arrayMapRecursive($filter, $val)
             : call_user_func($filter, $val);
         }
         return $result;

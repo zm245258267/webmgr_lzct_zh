@@ -31,7 +31,7 @@ class GameCmdLogService extends GameCmdLog{
 				$errmsg="ERROR: $errno - ";
 			} else {
 			    $params=(new GameCmdService())->formatExecParams($cmd, $params);
-			    if (empty($params) || !is_array($params)){
+			    if (empty($params)){
 					$cmd_data=$cmd;
 				}else{
 					$cmd_data=($cmd." ".$params);
