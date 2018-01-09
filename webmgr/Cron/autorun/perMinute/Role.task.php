@@ -113,6 +113,7 @@ class Role
     									$values.="'{$charlevel}',";
     									$values.="'{$gold}',";
     									$values.="'{$guildid}',";
+    									$values.="'{$guildstatus}',";
     									$values.="'{$charstate}',";
     									$values.="'{$createtime}',";
     									$values.="'{$updatetime}',";
