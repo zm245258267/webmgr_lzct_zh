@@ -98,7 +98,7 @@ $modelLabel = new \backend\models\GameChardesc();
                 echo '  <td>' . $model->account . '</td>';
                 echo '  <td>' . $model->charname . '</td>';
                 echo '  <td>' . $model->serverid . '</td>';
-                echo '  <td>' . $model->countryid . '</td>';
+                echo '  <td title="'.$model->countryid.'">' . CommonFun::nationIdToName($model->countryid) . '</td>';
                 echo '  <td>' . $model->charlevel . '</td>';
                 echo '  <td>' . $model->castlelevel . '</td>';
                 echo '  <td>' . $model->gold . '</td>';

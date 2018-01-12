@@ -23,6 +23,20 @@ return [
 				'PWD' => '511c0fcabff6bbdb',
 				'USER' => 'root' 
 		],
+        
+        /**
+         * 行为日志文件目录
+         */
 		'EVENT_LOG_PATH'=>'/data/web/gamelog/',
+        
+        /**
+         * 打点日志文件目录
+         */
+		'USER_REPORT_LOG_PATH'=>'/data/web/user-report-log/',
+        
+        /**
+         * 打点日志扫描等待同步时间（秒）
+         */
+		'USER_REPORT_LOG_FETCH_WAIT_SECOND'=>600,
 ];
 

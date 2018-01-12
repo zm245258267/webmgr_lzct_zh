@@ -11,7 +11,8 @@ class Role
     public function run ()
     {
     		$db=new \Db(C('GAME_DB'));
-    		$fields="`charid`,`spid`,`sbid`,`userid`,`account`,`charname`,`serverid`,`charlevel`,`gold`,`guildid`,`guildstatus`,`charstate`,`createtime`,`updatetime`,`loginip`,`viplv`,`vipexp`,`castlelevel`,`countryid`,`firstrechargetime`,`firstrechargelevel`,`totalrecharge`";
+//     		$fields="`charid`,`spid`,`sbid`,`userid`,`account`,`charname`,`serverid`,`charlevel`,`gold`,`guildid`,`guildstatus`,`charstate`,`createtime`,`updatetime`,`loginip`,`viplv`,`vipexp`,`castlelevel`,`countryid`,`firstrechargetime`,`firstrechargelevel`,`totalrecharge`";
+    		$fields="`charid`,`spid`,`sbid`,`userid`,`account`,`charname`,`serverid`,`charlevel`,`gold`,`charstate`,`createtime`,`updatetime`,`loginip`,`viplv`,`vipexp`,`castlelevel`,`countryid`,`firstrechargetime`,`firstrechargelevel`,`totalrecharge`";
     		$errorLogFile=LOG_ROOT.'RoleLog.err'; // 错误日志文件
     		$EventLogPath=C('EVENT_LOG_PATH');	// 行为日志目录
     		
@@ -22,8 +23,8 @@ class Role
     		$updates.="`charname`=values(`charname`),";
     		$updates.="`charlevel`=values(`charlevel`),";
     		$updates.="`gold`=values(`gold`),";
-    		$updates.="`guildid`=values(`guildid`),";
-    		$updates.="`guildstatus`=values(`guildstatus`),";
+    		//$updates.="`guildid`=values(`guildid`),";   // 任务ID，程序说取不到，另外做脚本处理。。
+    		//$updates.="`guildstatus`=values(`guildstatus`),";    // 任务ID，程序说取不到，另外做脚本处理。。
     		$updates.="`charstate`=values(`charstate`),";
     		$updates.="`updatetime`=values(`updatetime`),";
     		$updates.="`loginip`=values(`loginip`),";
@@ -89,8 +90,8 @@ class Role
     									$charname=$row[2];
     									$charlevel=$row[7];
     									$gold=$row[11];
-    									$guildid=$row[12];
-    									$guildstatus=$row[13];
+    									//$guildid=$row[12];       // 日志传过来的为章节ID
+    									//$guildstatus=$row[13];
     									$charstate=0;
     									$createtime=($row[22]?$row[22]:date('Y-m-d H:i:s'));
     									$updatetime=($row[22]?$row[22]:date('Y-m-d H:i:s'));
@@ -112,8 +113,8 @@ class Role
     									$values.="'{$serverId}',";
     									$values.="'{$charlevel}',";
     									$values.="'{$gold}',";
-    									$values.="'{$guildid}',";
-    									$values.="'{$guildstatus}',";
+    									//$values.="'{$guildid}',";    // 取不到啊取不到。。
+    									//$values.="'{$guildstatus}',";
     									$values.="'{$charstate}',";
     									$values.="'{$createtime}',";
     									$values.="'{$updatetime}',";

@@ -115,7 +115,7 @@ $modelLabel = new \backend\models\GameLog();
 //                 echo '  <td>' . $model->viplv . '</td>';
                 echo '  <td>' . $model->charlevel . '</td>';
                 echo '  <td>' . $model->castleLevel . '</td>';
-                echo '  <td>' . ($model->countryId) . '</td>';	// @todo 游戏定义
+                echo '  <td title="'.$model->countryId.'">' . (CommonFun::nationIdToName($model->countryId)) . '</td>';
                 echo '  <td title="'.$events[$model->eventId]['target_id'].'">' . $model->targetId . '</td>';
                 echo '  <td title="'.$events[$model->eventId]['target_name'].'">' . $model->targetName . '</td>';
                 echo '  <td title="'.$events[$model->eventId]['field1'].'">' . $model->field1 . '</td>';

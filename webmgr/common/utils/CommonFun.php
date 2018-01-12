@@ -277,10 +277,13 @@ class CommonFun extends Object{
      * @param int $id
      * @return string
      */
-    public static function SubModuleIdToName($id){
-    	$game_module_sub_type_config=\Yii::$app->params['GAME_MODULE_SUB_TYPE_CONFIG'];
-    	if ($game_module_sub_type_config[$id]){
-    		return $game_module_sub_type_config[$id];
+    public static function nationIdToName($id){
+        static $game_nations_config;
+        if (!$game_nations_config){
+            $game_nations_config=\Yii::$app->params['GAME_NATIONS_CONFIG'];
+        }
+        if ($game_nations_config[$id]){
+            return $game_nations_config[$id];
     	}
     	return $id;
     }

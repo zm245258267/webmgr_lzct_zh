@@ -7,6 +7,7 @@ $params = array_merge(
 	require(__DIR__ . '/../../common/config/game_task_group_config.php'),
 	require(__DIR__ . '/../../common/config/game_module_type_config.php'),
 	require(__DIR__ . '/../../common/config/game_module_sub_type_config.php'),
+	require(__DIR__ . '/../../common/config/game_nations_config.php'),
     require(__DIR__ . '/params.php')
 );
 
