@@ -31,7 +31,7 @@ class EventLog
     						$eventId=basename($eventdir);
     						
     						if (!is_dir($eventdir))continue;
-    						if (in_array($eventId, [1,38]))continue;// 在线日志等不用记录
+    						if (in_array($eventId, [1,38,'user-report-log']))continue;// 在线日志等不用记录
     						
     						// 处理各个事件日志
     						$filepath=$eventdir."/";
