@@ -77,7 +77,7 @@ $modelLabel = new \backend\models\GameChardesc();
 		  				<td><?=$key?></td>
 		  				<td><?=$row['get']?></td>
 		  				<td><?=$row['completed']?></td>
-		  				<td><?=@round($row['completed']/($row['completed']+$row['get']),4)*100?>%</td>
+		  				<td><?=$row['completeRate']?>%</td>
 		  			</tr>
 		  			<?php endforeach;?>
 		  		</tbody>

@@ -289,6 +289,22 @@ class CommonFun extends Object{
     }
     
     /**
+     * 登陆状态ID转状态名(打点日志)
+     * @param int $id
+     * @return string
+     */
+    public static function stateToName($id){
+        static $game_login_status_config;
+        if (!$game_login_status_config){
+            $game_login_status_config=\Yii::$app->params['GAME_LOGIN_STATUS_CONFIG'];
+        }
+        if ($game_login_status_config[$id]){
+            return $game_login_status_config[$id];
+    	}
+    	return $id;
+    }
+    
+    /**
      * 数组转对象
      * @param array $array
      * @return \stdClass[]

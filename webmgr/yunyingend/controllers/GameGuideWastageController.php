@@ -46,15 +46,18 @@ class GameGuideWastageController extends BaseController
         	$query->andWhere(['in','serverid',explode(",", $serverId)]);
         }
         
-        $rows=$query->select(['guildid','sum(if(`guildstatus`=0,1,0)) getNums','sum(if(`guildstatus`=0,0,1)) completedNums'])->groupBy('guildid')->orderBy('guildid')->indexBy('guildid')->asArray()->all();
+        $rows=$query->select(['guildid','sum(if(`guildstatus`=1,1,0)) getNums','sum(if(`guildstatus`=3,1,0)) completedNums'])->groupBy('guildid')->orderBy('guildid')->indexBy('guildid')->asArray()->all();
         
 //         $barData=[];
         $tableData=[];
         
         foreach ($rows as $key=>$row){
-            $task=CommonFun::TaskGroupIdToName($key);
+            $task=CommonFun::TaskIdToName($key);
 //         	$barData[$task]=$row['getNums']+0;
-        	$tableData[$task]=['get'=>$row['getNums']+0,'completed'=>$row['completedNums']+0];
+            $completeRate=@round($row['completed']/($row['completed']+$row['get']),4);
+            $completeRate=($completeRate>0?$completeRate:0);
+        	$tableData[$task]=['get'=>$row['getNums']+0,'completed'=>$row['completedNums']+0,'completeRate'=>$completeRate];
+        	
         }
 
         return $this->render('index', [

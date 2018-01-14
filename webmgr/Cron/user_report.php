@@ -37,7 +37,7 @@ class Autorun
         if($params && isset($params[1]))
         {
             $action = $params[1];
-            $tasks  = glob(CLI_ROOT . "user_report/{$action}/*");
+            $tasks  = glob(CLI_ROOT . "UserReport/{$action}/*");
             if($tasks)
             {
                 foreach($tasks as $taskFile)
