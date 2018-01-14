@@ -28,10 +28,5 @@ return [
          * 行为日志文件目录
          */
 		'EVENT_LOG_PATH'=>'/data/web/gamelog/',
-        
-        /**
-         * 打点日志文件目录
-         */
-		'USER_REPORT_LOG_PATH'=>'/data/web/user-report-log/',
 ];
 
