@@ -6,6 +6,7 @@ use Yii;
 use backend\models\GameUserReport;
 use yii\web\NotFoundHttpException;
 use yii\db\Query;
+use backend\services\GameUserReportService;
 
 /**
  * GameUserReportController implements the CRUD actions for GameUserReport model.
@@ -20,17 +21,13 @@ class GameUserReportController extends BaseController
      */
     public function actionIndex()
     {
-        $query = GameUserReport::find();
-        $query->select("state,count(*) totalDevice")->groupBy("state");
-        
         $orderby = Yii::$app->request->get('orderby', '');
         if(empty($orderby)){
             $orderby='state';
         }
         
-        $subSql=$query->createCommand()->rawSql;
+        $dataSet=(new GameUserReportService())->queryData(['orderby'=>$orderby]);
         
-        $dataSet=(new Query())->select("state,totalDevice")->from("({$subSql}) tmp")->orderBy($orderby)->all();
         return $this->render('index', [
             'dataSet'=>$dataSet,
         ]);

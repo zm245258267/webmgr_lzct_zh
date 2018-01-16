@@ -7,10 +7,7 @@ use common\utils\CommonFun;
 use Yii;
 use yii\data\Pagination;
 use backend\models\GameLoginLog;
-use yii\data\ActiveDataProvider;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * GameLoginLogController implements the CRUD actions for GameLoginLog model.

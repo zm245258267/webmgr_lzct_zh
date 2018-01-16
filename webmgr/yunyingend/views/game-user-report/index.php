@@ -46,10 +46,10 @@ $modelLabel = new \backend\models\GameUserReport();
             <tbody>
             
             <?php
-            foreach ($dataSet as $data) {
+            foreach ($dataSet as $id=>$totalDevice) {
                 echo '<tr id="rowid_">';
-                echo '  <td title="'.$data['state'].'">' . CommonFun::stateToName($data['state']) . '</td>';
-                echo '  <td>' . $data['totalDevice'] . '</td>';
+                echo '  <td title="'.$id.'">' . CommonFun::stateToName($id) . '</td>';
+                echo '  <td>' . $totalDevice . '</td>';
                 echo '</tr>';
             }
             
