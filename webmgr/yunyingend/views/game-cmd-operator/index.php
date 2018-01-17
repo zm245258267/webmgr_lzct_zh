@@ -92,7 +92,7 @@ $(function(){
 
 	// 执行
     var url='<?=Url::toRoute('game-cmd-operator/operator')?>';
-	$("#submit").one("click",function(){
+	$("#submit").bind("click",function(){
 		admin_tool.confirm("确认执行？",function(){
 			var res=http_post(url,$("form[name=data-form]").serialize());
 		    admin_tool.alert('msg_info',res.msg,(res.errno?'danger':'success'));
