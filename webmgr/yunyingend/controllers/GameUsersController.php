@@ -28,6 +28,7 @@ class GameUsersController extends BaseController
         $query = GameUsers::find();
          $querys = Yii::$app->request->get('query');
          $serverId = Yii::$app->request->get('serverId');
+         $spId = Yii::$app->request->get('spId');
          $createtime=$querys['createtime'];
          $timetype=$querys['timetype']?$querys['timetype']:'h';
          unset($querys['createtime'],$querys['timetype']);
@@ -58,6 +59,9 @@ class GameUsersController extends BaseController
         $query->andWhere(['between','createtime',$start,$end.':59']);
         if ($serverId){
         	$query->andWhere(['in','serverid',explode(",", $serverId)]);
+        }
+        if ($spId){
+            $query->andWhere(['in','createspid',explode(",", $spId)]);
         }
         
         $totalReg=$query->count();

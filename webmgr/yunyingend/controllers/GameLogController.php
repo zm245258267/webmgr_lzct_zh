@@ -64,6 +64,10 @@ class GameLogController extends BaseController
         if ($eventId){
         	$query->andWhere(['in','eventId',explode(",", $eventId)]);
         }
+        $spId = Yii::$app->request->get('spId');
+        if ($spId){
+            $query->andWhere(['in','spid',explode(",", $spId)]);
+        }
         
         // 获取存在的表名
         $start_date=date('Y-m-d',strtotime($start));

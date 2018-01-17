@@ -26,7 +26,12 @@ class GameUserReportController extends BaseController
             $orderby='state';
         }
         
-        $dataSet=(new GameUserReportService())->queryData(['orderby'=>$orderby]);
+        $spId=Yii::$app->request->get('spId', '');
+        $serverId=Yii::$app->request->get('serverId', '');
+        
+        $querys=['spId'=>$spId,'serverId'=>$serverId];
+        
+        $dataSet=(new GameUserReportService())->queryData(['querys'=>$querys,'orderby'=>$orderby]);
         
         return $this->render('index', [
             'dataSet'=>$dataSet,

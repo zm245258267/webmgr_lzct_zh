@@ -7,6 +7,8 @@ use common\utils\CommonFun;
 use yii\helpers\Url;
 
 use backend\models\GameUserReport;
+use backend\widgets\SearchFormCommonField;
+use yii\base\Widget;
 
 $modelLabel = new \backend\models\GameUserReport();
 ?>
@@ -28,6 +30,19 @@ $modelLabel = new \backend\models\GameUserReport();
         
         <div class="box-body">
           <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+          	<!-- row start search-->
+          	<div class="row">
+          	<div class="col-sm-12">
+                <?php ActiveForm::begin(['id' => 'game-user-report-search-form', 'method'=>'get', 'options' => ['class' => 'form-inline'], 'action'=>Url::toRoute('game-user-report/index')]); ?>     
+                <?=SearchFormCommonField::widget()?>
+              <div class="form-group">
+              	<a onclick="searchAction()" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i>搜索</a>
+           	  </div>
+               <?php ActiveForm::end(); ?> 
+            </div>
+          	</div>
+          	<!-- row end search -->
+          	
           	<!-- row start -->
           	<div class="row">
           	<div class="col-sm-12 table-responsive">

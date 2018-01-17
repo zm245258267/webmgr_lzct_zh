@@ -55,6 +55,10 @@ class GameLoginLogController extends BaseController
         if ($serverId){
         	$query->andWhere(['in','server',explode(",", $serverId)]);
         }
+        $spId = Yii::$app->request->get('spId');
+        if ($spId){
+            $query->andWhere(['in','spid',explode(",", $spId)]);
+        }
 
         $pagination = new Pagination([
             'totalCount' =>$query->count(), 

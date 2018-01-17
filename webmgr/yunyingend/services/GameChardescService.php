@@ -10,6 +10,11 @@ class GameChardescService extends GameChardesc
     {
         $query = GameChardesc::find();
         $serverId = $querys['serverId'];
+        $spId = $querys['spId'];
+        
+        unset($querys['serverId']);
+        unset($querys['spId']);
+        
         if (count( $querys ) > 0) {
             $condition = "";
             $parame = array ();
@@ -36,6 +41,10 @@ class GameChardescService extends GameChardesc
                     explode( ",", $serverId ) 
             ];
             $query->andWhere( $where );
+        }
+        
+        if ($spId){
+            $query->andWhere(['in','spid',explode(",", $spId)]);
         }
         
         $field = [

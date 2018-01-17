@@ -21,6 +21,7 @@ class GameCharLevelDistController extends BaseController
     {
         $querys = Yii::$app->request->get( 'query' );
         $querys['serverId'] = Yii::$app->request->get( 'serverId' );
+        $querys['spId'] = Yii::$app->request->get( 'spId' );
         
         $ChardescService = new GameChardescService();
         

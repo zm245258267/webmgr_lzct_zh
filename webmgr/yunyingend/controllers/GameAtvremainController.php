@@ -61,8 +61,13 @@ class GameAtvremainController extends BaseController
             ];
         }
         
+        $spId = Yii::$app->request->get('spId');
+        if ($spId){
+            $query->andWhere(['in','spid',explode(",", $spId)]);
+        }
+        
         $models = $query->select( "date(logdate) logdate,sum({$field}) totalAtvUser" )
-            ->where( $where )
+            ->andWhere( $where )
             ->groupBy( 'logdate' )
             ->orderBy( 'logdate' )
             ->indexBy( 'logdate' )

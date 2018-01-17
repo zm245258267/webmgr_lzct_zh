@@ -31,11 +31,6 @@ $modelLabel = new \backend\models\GameChardesc();
                 <?php ActiveForm::begin(['id' => 'game-guide-wastage-search-form', 'method'=>'get', 'options' => ['class' => 'form-inline'], 'action'=>Url::toRoute('game-guide-wastage/index')]); ?>     
 
                   <?=SearchFormCommonField::widget()?>
-
-                  <div class="form-group" style="margin: 5px;">
-                      <label>渠道ID:</label>
-                      <input type="text" class="form-control" id="query[spid]" name="query[spid]"  value="<?=isset($query["spid"]) ? $query["spid"] : "" ?>">
-                  </div>
               <div class="form-group">
               	<a onclick="searchAction()" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i>搜索</a>
            	  </div>

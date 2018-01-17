@@ -31,6 +31,7 @@ class GameChardescController extends BaseController
         $query = GameChardesc::find();
          $querys = Yii::$app->request->get('query');
          $serverId = Yii::$app->request->get('serverId');
+         $spId = Yii::$app->request->get('spId');
          
         if(count($querys) > 0){
             $condition = "";
@@ -50,6 +51,10 @@ class GameChardescController extends BaseController
             if(count($parame) > 0){
                 $query = $query->where($condition, $parame);
             }
+        }
+        
+        if ($spId){
+            $query->andWhere(['in','spid',explode(",", $spId)]);
         }
         
         $totalCount=0;

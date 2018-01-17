@@ -568,6 +568,45 @@ if($otherMenu == false){
 	</div>
 </div>
 
+<!-- 渠道选择面版 start -->
+<div class="modal fade" id="groupSpIdDialog" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">×</button>
+				<h3>渠道</h3>
+			</div>
+			<div class="modal-body">
+                <?php $form = ActiveForm::begin(["id" => "game-group-spid-form", "class"=>"form-horizontal"]); ?>                      
+                 
+
+          <div id="playerId_div" class="form-group">
+          	<?php foreach ($this->params['groupSp'] as $groupId=>$groups):?>
+          	<div class="row">
+          		<div class="col-sm-2"><?=$groups['group_name']?></div>
+          		<div class="col-sm-10">
+          			<ul class="select_ul w100">
+	              	<?php foreach ($groups['spList'] as $sp):?>
+	              	<li><label title="<?=$sp['spName']?>"><input type="checkbox" name="spId" value="<?=$sp['spId']?>" spName="<?=$sp['spName']?>" /> <?=$sp['spName']?></label></li>
+	              	<?php endforeach;?>
+	              </ul>
+          		</div>
+          	</div>
+          	<?php endforeach;?>
+              <div class="clear"></div>
+          </div>
+
+			<?php ActiveForm::end(); ?>          
+                </div>
+			<div class="modal-footer">
+				<a href="#" class="btn btn-default" data-dismiss="modal">关闭</a> <a
+					id="game_group_spid_dialog_ok" href="#" class="btn btn-primary">确定</a>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 渠道选择面版 end -->
 
 <script src="<?=Url::base()?>/plugins/form/jquery.form.min.js"></script>
 
@@ -691,7 +730,45 @@ if($otherMenu == false){
 			$('#game-group-server-form input[name=serverId]').check(serverIdStr);
 		}
 	});
+	
+//////////////////////////////////////////////////
+	// 渠道选择 start
+	$('#spIdSelect').click(function(e){
+		e.preventDefault();
+		$('#groupSpIdDialog').modal('show');
+	});
 
+	$('#game_group_spid_dialog_ok').click(function (e) {
+	    e.preventDefault();
+	    var spIdStr='';
+	    var spNameStr='';
+		$('#game-group-spid-form input[name=spId]:checked').each(function(i){
+				spIdStr+=(this.value+',');
+				spNameStr+=($(this).attr("spName")+',');
+			});
+		spIdStr=spIdStr.slice(0,-1);
+		spNameStr=spNameStr.slice(0,-1);
+
+		if(spNameStr==''){
+			spNameStr='请选择';
+		}
+		$("#spIdSelect").html(spNameStr);
+		$("#spIdSelect").attr("title",spNameStr);
+		$("input[type=hidden][id='spId']").val(spIdStr);
+		$("input[type=hidden][id='spName']").val(spNameStr);
+
+		$('#groupSpIdDialog').modal('hide');
+		return;
+	});
+
+	// 选中渠道
+	$(function(){
+		var spIdStr=$("input[type=hidden][id='spId']").val();
+		if(spIdStr){
+			$('#game-group-spid-form input[name=spId]').check(spIdStr);
+		}
+	});
+	// 渠道选择 end
 </script>
 
 

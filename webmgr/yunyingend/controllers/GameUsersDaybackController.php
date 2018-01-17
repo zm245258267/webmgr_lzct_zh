@@ -28,6 +28,7 @@ class GameUsersDaybackController extends BaseController
         $query = GameUsers::find();
          $querys = Yii::$app->request->get('query');
          $serverId=Yii::$app->request->get('serverId');
+         $spId = Yii::$app->request->get('spId');
          $createtime=$querys['createtime'];
          unset($querys['createtime']);
          $start=date('Y-m-01');
@@ -57,6 +58,9 @@ class GameUsersDaybackController extends BaseController
         $query->andWhere(['between','createtime',$start,$end]);
         if ($serverId){
         	$query->andWhere(['in','serverid',explode(",", $serverId)]);
+        }
+        if ($spId){
+            $query->andWhere(['in','createspid',explode(",", $spId)]);
         }
         
         $dataSet=[];

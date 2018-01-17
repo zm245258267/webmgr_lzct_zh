@@ -45,6 +45,15 @@ class GameRealOnlineController extends BaseController
                 $query = $query->where($condition, $parame);
             }
         }
+        
+        $serverId = Yii::$app->request->get('serverId');
+        if ($serverId){
+            $query->andWhere(['in','server',explode(",", $serverId)]);
+        }
+        $spId = Yii::$app->request->get('spId');
+        if ($spId){
+            $query->andWhere(['in','spid',explode(",", $spId)]);
+        }
 
         $rows=$query->select(['server','sum(online) num'])->groupBy('server')->orderBy('num desc')->asArray()->all();
         

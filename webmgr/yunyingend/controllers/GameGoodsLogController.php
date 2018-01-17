@@ -58,6 +58,10 @@ class GameGoodsLogController extends BaseController
         if ($serverId){
         	$query->andWhere(['in','server',explode(",", $serverId)]);
         }
+        $spId = Yii::$app->request->get('spId');
+        if ($spId){
+            $query->andWhere(['in','spid',explode(",", $spId)]);
+        }
 
         $pagination = new Pagination([
             'totalCount' =>$query->count(), 
@@ -124,6 +128,10 @@ class GameGoodsLogController extends BaseController
         $query->andWhere(['between','logtime',$start,$end.":59"]);
         if ($serverId){
         	$query->andWhere(['in','server',explode(",", $serverId)]);
+        }
+        $spId = Yii::$app->request->get('spId');
+        if ($spId){
+            $query->andWhere(['in','spid',explode(",", $spId)]);
         }
         
         $query->groupBy(['module_sub_type','goods_id']);

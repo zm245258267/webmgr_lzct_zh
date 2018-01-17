@@ -59,6 +59,10 @@ class GameSummayController extends BaseController
         if ($serverId){
         	$query->andWhere(['in','serverid',explode(",", $serverId)]);
         }
+        $spId = Yii::$app->request->get('spId');
+        if ($spId){
+            $query->andWhere(['in','spid',explode(",", $spId)]);
+        }
 
         $pagination = new Pagination([
             'totalCount' =>$query->count(), 

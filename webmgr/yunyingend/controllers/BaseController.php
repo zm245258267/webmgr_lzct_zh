@@ -11,6 +11,8 @@ use backend\models\AdminLog;
 use common\utils\CommonFun;
 use yii\helpers\StringHelper;
 use yii\helpers\Inflector;
+use backend\models\GameServer;
+use backend\models\GameSpGroup;
 class BaseController extends Controller
 {
     /**
@@ -21,6 +23,7 @@ class BaseController extends Controller
         if (parent::beforeAction($action)) {
             if($this->verifyPermission($action) == true){
             	
+            	### 服务器选择面版数据处理 start
             	// assign 服务器列表
             	$GameServerGroup=GameServerGroup::find();
             	$GameServerGroup->leftJoin('game_server','game_server_group.id=game_server.groupId');
@@ -54,6 +57,44 @@ class BaseController extends Controller
             	
             	$this->view->params['groupServers']=$groupServers;
             	$this->view->params['groupServersParams']=$groupServersParams;
+            	### 服务器选择面版数据处理 end
+            	
+            	### 渠道选择面版数据处理 start
+            	// assign 渠道列表
+            	$GameSpGroup=GameSpGroup::find();
+            	$GameSpGroup->leftJoin('game_sp','game_sp_group.id=game_sp.groupId');
+            	$queryData=$GameSpGroup->select(["game_sp_group.group_name","game_sp.*"])->asArray()->all();
+            	
+            	// 默认渠道
+            	$defaultSp=[];
+            	$defaultSp['spId']=$queryData[0]['spId'];
+            	$defaultSp['spName']=$queryData[0]['spName'];
+            	
+            	$groupSp=[];
+            	foreach ($queryData as $row){
+            	    $groupSp[$row['groupId']]['group_name']=$row['group_name'];
+            	    $groupSp[$row['groupId']]['spList'][]=$row;
+            	}
+            	
+            	$groupSpIdParams=[];
+            	$groupSpIdParams['spId']=\Yii::$app->request->get('spId');
+            	$groupSpIdParams['spName']=\Yii::$app->request->get('spName');
+            	
+            	// 渠道默认选择处理
+            	if(!isset($groupSpIdParams['spId'])){
+            	    $groupSpIdParams['spId']=$defaultServer['spId'];
+            	    $groupSpIdParams['spName']=$defaultServer['spName'];
+            	    
+            	    // 重置参数
+            	    $params=\Yii::$app->request->getQueryParams();
+            	    $params['spId']=$groupServersParams['spId'];
+            	    \Yii::$app->request->setQueryParams($params);
+            	}
+            	
+            	$this->view->params['groupSp']=$groupSp;
+            	$this->view->params['groupSpIdParams']=$groupSpIdParams;
+            	### 渠道选择面版数据处理 end
+            	
                 return true;
             }
         }

@@ -7,6 +7,8 @@ use common\utils\CommonFun;
 use yii\helpers\Url;
 
 use backend\models\GameRealOnline;
+use backend\widgets\SearchFormCommonField;
+use yii\base\Widget;
 
 $modelLabel = new \backend\models\GameRealOnline();
 ?>
@@ -33,10 +35,7 @@ $modelLabel = new \backend\models\GameRealOnline();
           	<div class="col-sm-12">
                 <?php ActiveForm::begin(['id' => 'game-real-online-search-form', 'method'=>'get', 'options' => ['class' => 'form-inline'], 'action'=>Url::toRoute('game-real-online/index')]); ?>     
                 
-                  <div class="form-group" style="margin: 5px;">
-                      <label>渠道ID:</label>
-                      <input type="text" class="form-control" id="query[spid]" name="query[spid]"  value="<?=isset($query["spid"]) ? $query["spid"] : "" ?>">
-                  </div>
+                  <?=SearchFormCommonField::widget()?>
               <div class="form-group">
               	<a onclick="searchAction()" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i>搜索</a>
            	  </div>

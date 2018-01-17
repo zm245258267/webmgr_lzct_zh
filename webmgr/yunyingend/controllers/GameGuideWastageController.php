@@ -45,6 +45,10 @@ class GameGuideWastageController extends BaseController
         if ($serverId){
         	$query->andWhere(['in','serverid',explode(",", $serverId)]);
         }
+        $spId = Yii::$app->request->get('spId');
+        if ($spId){
+            $query->andWhere(['in','spid',explode(",", $spId)]);
+        }
         
         $rows=$query->select(['guildid','sum(if(`guildstatus`=1,1,0)) getNums','sum(if(`guildstatus`=3,1,0)) completedNums'])->groupBy('guildid')->orderBy('guildid')->indexBy('guildid')->asArray()->all();
         

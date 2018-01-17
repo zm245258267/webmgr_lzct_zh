@@ -15,9 +15,17 @@ class GameUserReportService extends GameUserReport
      */
     public function queryData($params)
     {
+        $condition=[];
+        if ($params['querys']['spId']){
+            $condition=['and',$condition,['in','spid',explode(",", $params['querys']['spId'])]];
+        }
+        if ($params['querys']['serverId']){
+            $condition=['and',$condition,['in','serverid',explode(",", $params['querys']['serverId'])]];
+        }
+        
         $query = GameUserReport::find();
         $query->select( "state,count(*) totalDevice" )
-            ->groupBy( "state" );
+            ->groupBy( "state" )->where($condition);
         
         $subSql = $query->createCommand()->rawSql;
         

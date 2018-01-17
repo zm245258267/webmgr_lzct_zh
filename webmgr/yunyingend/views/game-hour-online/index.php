@@ -35,10 +35,6 @@ $modelLabel = new \backend\models\GameHourOnline();
                 <?php ActiveForm::begin(['id' => 'game-hour-online-search-form', 'method'=>'get', 'options' => ['class' => 'form-inline'], 'action'=>Url::toRoute('game-hour-online/index')]); ?>     
                 
                 <?=SearchFormCommonField::widget()?>
-                  <div class="form-group" style="margin: 5px;">
-                      <label>渠道ID:</label>
-                      <input type="text" class="form-control" id="query[spid]" name="query[spid]"  value="<?=isset($query["spid"]) ? $query["spid"] : "" ?>">
-                  </div>
 
                   <div class="form-group" style="margin: 5px;">
                       <label><?=$modelLabel->getAttributeLabel('logdate')?>:</label>
