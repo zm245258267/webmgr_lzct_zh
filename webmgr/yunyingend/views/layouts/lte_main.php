@@ -103,7 +103,7 @@ if($otherMenu == false){
             return {
             	confirm : function(content, ok_fun){
             		$('#confirm_content').text(content);
-            		$("#confirm_dialog_ok").unbind("click").bind("click", function() { 
+            		$("#confirm_dialog_ok").unbind("click").one("click", function() { 
             			ok_fun();
             			$('#confirm_dialog').modal('hide');
             		});
