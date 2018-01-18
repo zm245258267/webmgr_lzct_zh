@@ -42,14 +42,11 @@ class GameUserReportService extends GameUserReport
             $totalDevice+=$dataSet[$id]['totalDevice'];
             $result[$id]['totalDevice'] = $dataSet[$id]['totalDevice'] + 0;
         }
+        $tmpTotalDevice=$totalDevice;
         foreach ( $status as $id => $val ) {
-            $arrivedPercent=($totalDevice>0?@round(($totalDevice-$result[$id]['totalDevice'])/$totalDevice*100,2):0);
-            if ($diffNums==0&&$result[$id]['totalDevice']>0){
-                $result[$id]['arrivedPercent']=100;
-            }else{
-                $result[$id]['arrivedPercent'] = $arrivedPercent + 0;
-            }
-            $totalDevice-=$result[$id]['totalDevice'];
+            $arrivedPercent=($tmpTotalDevice>0?@round(($tmpTotalDevice-$result[$id-1]['totalDevice'])/$totalDevice*100,2):0);
+            $result[$id]['arrivedPercent'] = $arrivedPercent + 0;
+            $tmpTotalDevice-=$result[$id-1]['totalDevice'];
         }
         
         return $result;
