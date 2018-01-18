@@ -37,9 +37,19 @@ class GameUserReportService extends GameUserReport
         
         $result = [ ];
         $status = \Yii::$app->params['GAME_LOGIN_STATUS_CONFIG'];
-        
+        $totalDevice=0;
         foreach ( $status as $id => $val ) {
-            $result[$id] = $dataSet[$id]['totalDevice'] + 0;
+            $totalDevice+=$dataSet[$id]['totalDevice'];
+            $result[$id]['totalDevice'] = $dataSet[$id]['totalDevice'] + 0;
+        }
+        foreach ( $status as $id => $val ) {
+            $arrivedPercent=($totalDevice>0?@round(($totalDevice-$result[$id]['totalDevice'])/$totalDevice*100,2):0);
+            if ($diffNums==0&&$result[$id]['totalDevice']>0){
+                $result[$id]['arrivedPercent']=100;
+            }else{
+                $result[$id]['arrivedPercent'] = $arrivedPercent + 0;
+            }
+            $totalDevice-=$result[$id]['totalDevice'];
         }
         
         return $result;

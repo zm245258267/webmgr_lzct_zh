@@ -1,7 +1,5 @@
 
 <?php
-use yii\widgets\LinkPager;
-use yii\base\Object;
 use yii\bootstrap\ActiveForm;
 use common\utils\CommonFun;
 use yii\helpers\Url;
@@ -54,6 +52,7 @@ $modelLabel = new \backend\models\GameUserReport();
               $orderby = isset($_GET['orderby']) ? $_GET['orderby'] : '';
               echo '<th onclick="orderby(\'state\', \'desc\')" '.CommonFun::sortClass($orderby, 'state').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >状态</th>';
               echo '<th onclick="orderby(\'totalDevice\', \'desc\')" '.CommonFun::sortClass($orderby, 'totalDevice').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >设备数</th>';
+              echo '<th tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >到达率</th>';
 			?>
 	
             </tr>
@@ -61,10 +60,11 @@ $modelLabel = new \backend\models\GameUserReport();
             <tbody>
             
             <?php
-            foreach ($dataSet as $id=>$totalDevice) {
+            foreach ($dataSet as $id=>$row) {
                 echo '<tr id="rowid_">';
                 echo '  <td title="'.$id.'">' . CommonFun::stateToName($id) . '</td>';
-                echo '  <td>' . $totalDevice . '</td>';
+                echo '  <td>' . $row['totalDevice'] . '</td>';
+                echo '  <td>' . $row['arrivedPercent'] . '%</td>';
                 echo '</tr>';
             }
             
