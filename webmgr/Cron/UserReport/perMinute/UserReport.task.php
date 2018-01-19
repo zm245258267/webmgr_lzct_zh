@@ -11,12 +11,13 @@ class UserReport
     public function run ()
     {
         $db=new \Db(C('YUNYINGEND_DB'));
-        $fields="`id`,`state`,`value`,`firststate`,`firstvalue`,`userid`,`devname`,`sysname`,`sysver`,`cver`,`spid`,`sbid`,`createdate`,`logdate`,`firstlogdate`,`dups`,`stage`,`extrainfo`";
+        $fields="`id`,`state`,`value`,`firststate`,`firstvalue`,`serverid`,`userid`,`devname`,`sysname`,`sysver`,`cver`,`spid`,`sbid`,`createdate`,`logdate`,`firstlogdate`,`dups`,`stage`,`extrainfo`";
         $errorLogFile=LOG_ROOT.'UserReportLog.err'; // 错误日志文件
         $EventLogPath=C('EVENT_LOG_PATH');	// 行为日志目录
         
         $updates="`state`=values(`state`),";
         $updates.="`value`=values(`value`),";
+        $updates.="`serverid`=values(`serverid`),";
         $updates.="`userid`=values(`userid`),";
         $updates.="`devname`=values(`devname`),";
         $updates.="`sysname`=values(`sysname`),";
@@ -97,6 +98,7 @@ class UserReport
                                 $values.="'{$value}',";
                                 $values.="'{$firststate}',";
                                 $values.="'{$firstvalue}',";
+                                $values.="'{$serverId}',";
                                 $values.="'{$userid}',";
                                 $values.="'{$devname}',";
                                 $values.="'{$sysname}',";
@@ -158,8 +160,8 @@ class UserReport
                     
                     // 超过一天未同步的直接PASS
                     $pointInterval=($pointfilename-$currentFileName);
-                    if ($pointInterval>61){
-                        $currentFileName+=($pointInterval-61);
+                    if ($pointInterval>600){
+                        $currentFileName+=($pointInterval-600);
                     }
                     
                     // 保存当前指针
