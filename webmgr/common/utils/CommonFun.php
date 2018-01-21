@@ -3,6 +3,7 @@ namespace common\utils;
 use yii\base\Object;
 use Yii;
 use backend\models\GameEventMap;
+use backend\models\GameSp;
 class CommonFun extends Object{
     /*
     * 二维数组按照指定的键值进行排序
@@ -313,6 +314,22 @@ class CommonFun extends Object{
         }
         if ($game_login_status_config[$id]){
             return $game_login_status_config[$id];
+    	}
+    	return $id;
+    }
+    
+    /**
+     * SPID转渠道名
+     * @param int $id
+     * @return string
+     */
+    public static function spIdToName($id){
+        static $spids;
+        if (!$spids){
+            $spids=GameSp::find()->select(['spId','spName'])->indexBy('spId')->asArray()->all();
+        }
+        if ($spids[$id]){
+            return $spids[$id]['spName'];
     	}
     	return $id;
     }

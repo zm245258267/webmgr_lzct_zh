@@ -72,6 +72,7 @@ class GameChardesc extends \backend\models\BaseModel
             'userid' => '用户ID',
             'account' => '账号',
             'charname' => '角色名',
+            'spid' => '渠道ID',
             'serverid' => '服务器ID',
             'charlevel' => '领主等级',
             'gold' => '金币数量',

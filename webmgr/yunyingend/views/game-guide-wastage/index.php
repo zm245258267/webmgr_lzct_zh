@@ -61,18 +61,16 @@ $modelLabel = new \backend\models\GameChardesc();
 		  		<thead>
 		  			<tr>
 		  				<th>任务名</th>
-		  				<th>接取人数</th>
-		  				<th>完成人数</th>
-		  				<th title="完成人数/(接取人数+完成人数)*100">完成率</th>
+		  				<th>未完成人数</th>
+		  				<th title="当前任务人数（包括前置任务）/总任务人数*100">流失率</th>
 		  			</tr>
 		  		</thead>
 		  		<tbody>
 		  			<?php foreach ($dataSet['tableData'] as $key=>$row):?>
 		  			<tr>
-		  				<td><?=$key?></td>
-		  				<td><?=$row['get']?></td>
-		  				<td><?=$row['completed']?></td>
-		  				<td><?=$row['completeRate']?>%</td>
+		  				<td title="<?=$key?>"><?=$row['name']?></td>
+		  				<td><?=$row['totalPersons']?></td>
+		  				<td><?=$row['percent']?>%</td>
 		  			</tr>
 		  			<?php endforeach;?>
 		  		</tbody>
