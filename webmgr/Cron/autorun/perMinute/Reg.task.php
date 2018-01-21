@@ -55,12 +55,13 @@ class Reg
     								$mac=$row['13'];
     								$ip=ip2long($row[10]);
     								$clientVersion=$row[14];
+    								$spid=$row[20];
     								$sbid=$row[21];
     								$logdate=$row[22];
     								$charid=$row[1];
     								$charname=$row[2];
     								
-    								$params="'{$serverId}','{$account}','{$charid}','{$charname}','{$platform}','{$mac}','{$ip}','{$clientVersion}','1','{$sbid}','{$logdate}'";
+    								$params="'{$serverId}','{$account}','{$charid}','{$charname}','{$platform}','{$mac}','{$ip}','{$clientVersion}','1','{$spid}','{$sbid}','{$logdate}'";
     								$sql="call proc_record_game_user_login({$params})";
     								$db->execute($sql);
     								$error=$db->getError();

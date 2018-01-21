@@ -14,6 +14,7 @@ class Guide
     		$errorLogFile=LOG_ROOT.'GuideLog.err'; // 错误日志文件
     		$EventLogPath=C('EVENT_LOG_PATH');	// 行为日志目录
     		
+    		$updates='';
     		$updates.="`guildid`=values(`guildid`),";
     		$updates.="`guildstatus`=values(`guildstatus`)";
     		
